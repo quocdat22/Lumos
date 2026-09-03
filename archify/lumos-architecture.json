@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Lumos — Native E-Book RAG Architecture",
+    "output": "lumos-architecture.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "query-path",
+        "label": "Primary Query Path",
+        "focus": ["user", "streamlit", "fastapi", "rag_service", "embedder", "chroma", "llm", "openrouter"],
+        "note": "Follow user question from Streamlit to Chroma vector search and DeepSeek SSE streaming."
+      },
+      {
+        "id": "ingestion-path",
+        "label": "Document Ingestion",
+        "focus": ["streamlit", "fastapi", "parser", "storage", "embedder", "jina", "chroma"],
+        "note": "Multi-format e-book parsing, recursive chunking, and vector database upsert."
+      },
+      {
+        "id": "trust-boundaries",
+        "label": "Trust Boundaries",
+        "focus": ["jina", "openrouter", "fastapi", "storage"],
+        "note": "Isolate local workstation processing from external cloud AI APIs."
+      }
+    ]
+  },
+  "components": [
+    { "id": "user", "type": "external", "label": "Client Browser", "sublabel": "Web Client", "pos": [30, 280], "size": [130, 60] },
+    { "id": "streamlit", "type": "frontend", "label": "Streamlit UI", "sublabel": ":8501 Web App", "pos": [245, 280], "size": [130, 60], "tag": "Web UI" },
+    { "id": "fastapi", "type": "backend", "label": "FastAPI", "sublabel": ":8000 Gateway", "pos": [460, 280], "size": [140, 60], "brand": "fastapi", "tag": "API Router" },
+    { "id": "rag_service", "type": "backend", "label": "RAG Service", "sublabel": "Coordinator", "pos": [685, 280], "size": [130, 60], "tag": "Core" },
+    { "id": "parser", "type": "backend", "label": "Doc Pipeline", "sublabel": "PDF & EPUB", "pos": [460, 430], "size": [140, 60], "tag": "ETL" },
+    { "id": "storage", "type": "database", "label": "Local Storage", "sublabel": "Local Files", "pos": [460, 580], "size": [140, 60], "tag": "Disk" },
+    { "id": "embedder", "type": "backend", "label": "Jina Embedder", "sublabel": "API Client", "pos": [900, 130], "size": [130, 60], "tag": "Embeddings" },
+    { "id": "chroma", "type": "database", "label": "ChromaDB Store", "sublabel": "Cosine Index", "pos": [900, 280], "size": [130, 60], "tag": "Vector DB" },
+    { "id": "llm", "type": "backend", "label": "LLM Synthesizer", "sublabel": "DeepSeek Client", "pos": [900, 430], "size": [130, 60], "tag": "Inference" },
+    { "id": "jina", "type": "external", "label": "Jina AI Cloud", "sublabel": "v5-omni-small", "pos": [1115, 130], "size": [140, 60], "tag": "Cloud AI" },
+    { "id": "openrouter", "type": "external", "label": "OpenRouter", "sublabel": "DeepSeek-V4", "pos": [1115, 430], "size": [140, 60], "tag": "Cloud LLM" }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Local Host Environment (Python 3.12 / uv)",
+      "wraps": ["streamlit", "fastapi", "rag_service", "parser", "storage", "embedder", "chroma", "llm"],
+      "pad": 20
+    },
+    {
+      "kind": "security-group",
+      "label": "Core RAG Engine Subsystem",
+      "wraps": ["rag_service", "embedder", "chroma", "llm"],
+      "pad": 14
+    },
+    {
+      "kind": "region",
+      "label": "External Cloud AI Providers (HTTPS / Auth Keys)",
+      "wraps": ["jina", "openrouter"],
+      "pad": 20
+    }
+  ],
+  "connections": [
+    { "id": "user-to-ui", "from": "user", "to": "streamlit", "label": "Browser UI", "variant": "emphasis" },
+    { "id": "ui-to-api", "from": "streamlit", "to": "fastapi", "label": "POST /chat", "variant": "emphasis" },
+    { "id": "api-to-rag", "from": "fastapi", "to": "rag_service", "label": "ask_stream()", "variant": "emphasis" },
+    { "id": "rag-to-embedder", "from": "rag_service", "to": "embedder", "label": "embed query", "fromSide": "top", "toSide": "left" },
+    { "id": "embedder-to-jina", "from": "embedder", "to": "jina", "label": "HTTPS API", "variant": "security" },
+    { "id": "rag-to-chroma", "from": "rag_service", "to": "chroma", "label": "vector search", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "id": "rag-to-llm", "from": "rag_service", "to": "llm", "label": "context prompt", "variant": "emphasis", "fromSide": "bottom", "toSide": "left" },
+    { "id": "llm-to-openrouter", "from": "llm", "to": "openrouter", "label": "SSE stream", "variant": "security" },
+    { "id": "api-to-parser", "from": "fastapi", "to": "parser", "label": "POST /ingest", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "labelDy": 55 },
+    { "id": "parser-to-storage", "from": "parser", "to": "storage", "label": "raw files", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "labelDy": 55 }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Presentation & Gateway",
+      "items": [
+        "Streamlit web interface on :8501 supports drag-and-drop e-book upload and real-time SSE chat rendering",
+        "FastAPI gateway on :8000 exposes REST endpoints for ingestion, library health, and streaming responses",
+        "Zero heavyweight framework overhead; implements pure Python orchestration without LangChain"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Core RAG & Storage",
+      "items": [
+        "Multi-format ingestion: pypdf for PDFs, ebooklib + BeautifulSoup4 with zip fallback for EPUBs",
+        "Recursive text chunker splits chapters with 800-char window and 150-char overlap",
+        "Embedded ChromaDB maintains HNSW cosine vector index in ./data/chroma_db with SQLite persistence"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Security & External Cloud AI",
+      "items": [
+        "API keys (OPENROUTER_API_KEY, JINA_API_KEY) remain strictly confined to the local host environment",
+        "Jina Embeddings API computes task-specific dense vectors (retrieval.passage and retrieval.query)",
+        "OpenRouter streams DeepSeek-V4-Flash responses with citation metadata and grounded provenance"
+      ]
+    }
+  ]
+}
