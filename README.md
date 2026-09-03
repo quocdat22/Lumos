@@ -136,3 +136,16 @@ Run the test suite with `uv`:
 uv run pytest
 ```
 All unit tests cover parser integrity, chunking overlap, ChromaDB persistence, and FastAPI endpoint routes.
+
+---
+
+## 🚀 Future Improvements
+
+- **Hybrid Search**: BM25 keyword retrieval combined with dense vector embeddings via Reciprocal Rank Fusion (RRF).
+- **Cross-Encoder Re-Ranking**: Passage re-scoring with `jina-reranker-v2` to optimize top-k precision.
+- **Multi-Turn Chat & Query Rewriting**: Conversation session memory with standalone query reformulation.
+- **Selective Book Filtering**: Filter and scope queries to specific books, authors, or chapters.
+- **Advanced Document Parsing & OCR**: Support for scanned PDFs, mathematical formulas, and complex tables via Docling.
+- **Asynchronous Ingestion Queue**: Background task workers with real-time indexing progress updates.
+- **Late Chunking**: Token-level boundary chunking preserving full document embedding context.
+- **RAG Evaluation & Tracing**: Automated faithfulness and context recall benchmarking via Ragas.
