@@ -40,8 +40,8 @@ def parse_args() -> argparse.Namespace:
         "-o",
         "--output",
         type=str,
-        default="data/uploads/BuildingEffectiveAIAgents_Anthropic_bbox.pdf",
-        help="Path to save the annotated PDF (default: data/uploads/BuildingEffectiveAIAgents_Anthropic_bbox.pdf)",
+        default=None,
+        help="Path to save the annotated PDF (default: <input_dir>/<file_stem>/<file_stem>_bbox.pdf)",
     )
     parser.add_argument(
         "--show-lines",
@@ -58,8 +58,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--images-dir",
         type=str,
-        default="data/uploads/bbox_previews",
-        help="Directory to save PNG preview images (default: data/uploads/bbox_previews)",
+        default=None,
+        help="Directory to save PNG preview images (default: <input_dir>/<file_stem>/bbox_previews)",
     )
     parser.add_argument(
         "--dpi",
@@ -86,20 +86,31 @@ def main() -> None:
     args = parse_args()
 
     input_path = Path(args.input)
-    output_path = Path(args.output)
-    images_dir = Path(args.images_dir) if args.export_images else None
-
     if not input_path.exists():
         print(f"[Error] Input file not found: {input_path}", file=sys.stderr)
         sys.exit(1)
+
+    # Place outputs into a folder named after the input file
+    doc_dir = input_path.parent / input_path.stem
+    doc_dir.mkdir(parents=True, exist_ok=True)
+
+    output_path = Path(args.output) if args.output else (doc_dir / f"{input_path.stem}_bbox.pdf")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if args.export_images:
+        images_dir = Path(args.images_dir) if args.images_dir else (doc_dir / "bbox_previews")
+        images_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        images_dir = None
 
     print("=" * 65)
     print("           Lumos PDF Bounding Box Visualizer")
     print("=" * 65)
     print(f" Input File     : {input_path}")
+    print(f" Output Folder  : {doc_dir}")
     print(f" Output PDF     : {output_path}")
     print(f" Show Lines     : {args.show_lines}")
-    print(f" Export Previews: {args.export_images} ({args.images_dir if args.export_images else 'N/A'})")
+    print(f" Export Previews: {args.export_images} ({images_dir if args.export_images else 'N/A'})")
     if args.max_pages:
         print(f" Max Pages      : {args.max_pages}")
     print("-" * 65)

@@ -19,7 +19,7 @@ uv sync
 ## Hướng dẫn sử dụng
 
 ### 1. Chạy mặc định với file PDF của bạn
-Lệnh này sẽ tự động lấy file `data/uploads/BuildingEffectiveAIAgents_Anthropic.pdf` và tạo ra file `data/uploads/BuildingEffectiveAIAgents_Anthropic_bbox.pdf`:
+Lệnh này sẽ tự động lấy file `data/uploads/BuildingEffectiveAIAgents_Anthropic.pdf` và lưu các file kết quả vào thư mục con cùng tên `data/uploads/BuildingEffectiveAIAgents_Anthropic/`:
 ```bash
 uv run python -m scripts.pdf_bbox_tool.main
 # Hoặc chạy trực tiếp file script:
