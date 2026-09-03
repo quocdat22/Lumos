@@ -2,7 +2,7 @@ import tempfile
 from pathlib import Path
 import ebooklib
 from ebooklib import epub
-from pypdf import PdfWriter
+import pymupdf
 
 from lumos.core.parser import DocumentParser
 
@@ -11,21 +11,38 @@ def test_parse_pdf():
     with tempfile.TemporaryDirectory() as tmpdir:
         pdf_path = Path(tmpdir) / "sample_book.pdf"
 
-        # Create a tiny 2-page PDF with pypdf
-        writer = PdfWriter()
-        writer.add_blank_page(width=200, height=200)
-        writer.add_blank_page(width=200, height=200)
-
-        # Add some text to pages (pypdf allows adding metadata)
-        writer.add_metadata({"/Title": "Artificial Intelligence Concepts"})
-        with open(pdf_path, "wb") as f:
-            writer.write(f)
+        # Create a 2-page PDF with pymupdf
+        doc = pymupdf.open()
+        p1 = doc.new_page(width=400, height=400)
+        p1.insert_text((20, 50), "First page content with AI concepts.")
+        p2 = doc.new_page(width=400, height=400)
+        p2.insert_text((20, 50), "Second page content with neural networks.")
+        doc.set_metadata({"title": "Artificial Intelligence Concepts"})
+        doc.save(str(pdf_path))
+        doc.close()
 
         parser = DocumentParser()
         assert parser.is_supported(pdf_path)
         sections = parser.parse(pdf_path)
-        # Blank pages have empty text, so extracted sections count is 0
-        assert isinstance(sections, list)
+        assert len(sections) == 2
+        assert sections[0].book_title == "Artificial Intelligence Concepts"
+        assert sections[0].section == "Page 1"
+        assert "AI concepts" in sections[0].text
+        assert sections[1].section == "Page 2"
+        assert "neural networks" in sections[1].text
+
+
+def test_parse_pdf_blank_page():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        pdf_path = Path(tmpdir) / "blank.pdf"
+        doc = pymupdf.open()
+        doc.new_page(width=200, height=200)
+        doc.save(str(pdf_path))
+        doc.close()
+
+        parser = DocumentParser()
+        sections = parser.parse(pdf_path)
+        assert sections == []
 
 
 def test_parse_epub():

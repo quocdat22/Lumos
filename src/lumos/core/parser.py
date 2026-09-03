@@ -7,7 +7,7 @@ import zipfile
 from bs4 import BeautifulSoup
 import ebooklib
 from ebooklib import epub
-from pypdf import PdfReader
+import pymupdf
 
 
 @dataclass
@@ -41,28 +41,37 @@ class DocumentParser:
             raise ValueError(f"Unsupported file format '{ext}'. Supported formats: {self.SUPPORTED_EXTENSIONS}")
 
     def _parse_pdf(self, path: Path) -> List[DocumentSection]:
-        reader = PdfReader(str(path))
-        book_title = path.stem
-        if reader.metadata and reader.metadata.title:
-            extracted_title = reader.metadata.title.strip()
-            if extracted_title:
-                book_title = extracted_title
-
         sections: List[DocumentSection] = []
-        for i, page in enumerate(reader.pages):
-            page_text = page.extract_text() or ""
-            page_text = page_text.strip()
-            if not page_text:
-                continue
+        with pymupdf.open(str(path)) as doc:
+            book_title = path.stem
+            if doc.metadata and doc.metadata.get("title"):
+                extracted_title = doc.metadata.get("title", "").strip()
+                if extracted_title:
+                    book_title = extracted_title
 
-            sections.append(
-                DocumentSection(
-                    text=page_text,
-                    book_title=book_title,
-                    section=f"Page {i + 1}",
-                    source_file=path.name,
+            for i, page in enumerate(doc):
+                # Extract text blocks: (x0, y0, x1, y1, "text", block_no, block_type)
+                # block_type 0 is text, 1 is image
+                blocks = page.get_text("blocks")
+                text_blocks: List[str] = []
+                for b in blocks:
+                    if len(b) >= 7 and b[6] == 0:
+                        block_text = b[4].strip()
+                        if block_text:
+                            text_blocks.append(block_text)
+
+                page_text = "\n\n".join(text_blocks).strip()
+                if not page_text:
+                    continue
+
+                sections.append(
+                    DocumentSection(
+                        text=page_text,
+                        book_title=book_title,
+                        section=f"Page {i + 1}",
+                        source_file=path.name,
+                    )
                 )
-            )
         return sections
 
     def _parse_epub(self, path: Path) -> List[DocumentSection]:
