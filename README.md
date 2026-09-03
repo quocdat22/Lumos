@@ -24,7 +24,11 @@ Built with **pure Python logic** (no heavy LangChain or LlamaIndex frameworks), 
 
 ---
 
-## 🏗️ Project Architecture
+## 🏗️ System Architecture
+
+![Lumos — Native E-Book RAG Architecture](archify/lumos-native-e-book-rag.svg)
+
+### 📂 Directory Structure
 
 ```
 Lumos/
