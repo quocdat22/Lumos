@@ -15,6 +15,10 @@ class SearchResult:
     section: str
     source_file: str
     score: float
+    page_start: Optional[int] = None
+    page_end: Optional[int] = None
+    prev_chunk_id: Optional[str] = None
+    next_chunk_id: Optional[str] = None
 
 
 class ChromaVectorStore:
@@ -94,6 +98,10 @@ class ChromaVectorStore:
                     section=str(meta.get("section", "General")),
                     source_file=str(meta.get("source_file", "Unknown")),
                     score=round(similarity, 4),
+                    page_start=int(meta["page_start"]) if "page_start" in meta and meta["page_start"] is not None else None,
+                    page_end=int(meta["page_end"]) if "page_end" in meta and meta["page_end"] is not None else None,
+                    prev_chunk_id=str(meta["prev_chunk_id"]) if "prev_chunk_id" in meta and meta["prev_chunk_id"] is not None else None,
+                    next_chunk_id=str(meta["next_chunk_id"]) if "next_chunk_id" in meta and meta["next_chunk_id"] is not None else None,
                 )
             )
 

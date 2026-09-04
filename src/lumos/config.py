@@ -26,6 +26,8 @@ class Settings(BaseSettings):
     chunk_size: int = 800
     chunk_overlap: int = 150
     top_k: int = 5
+    cross_page_chunking: bool = True
+    clean_headers_footers: bool = True
 
     # Server & UI Settings
     backend_host: str = "0.0.0.0"

@@ -94,6 +94,10 @@ def chat_endpoint(request: ChatRequest):
                         source_file=c.source_file,
                         score=c.score,
                         text=c.text,
+                        page_start=c.page_start,
+                        page_end=c.page_end,
+                        prev_chunk_id=c.prev_chunk_id,
+                        next_chunk_id=c.next_chunk_id,
                     ).model_dump()
                     for c in citations
                 ]
@@ -117,9 +121,14 @@ def chat_endpoint(request: ChatRequest):
                 source_file=c.source_file,
                 score=c.score,
                 text=c.text,
+                page_start=c.page_start,
+                page_end=c.page_end,
+                prev_chunk_id=c.prev_chunk_id,
+                next_chunk_id=c.next_chunk_id,
             )
             for c in response["citations"]
         ]
+
         return ChatResponse(
             query=response["query"],
             answer=response["answer"],

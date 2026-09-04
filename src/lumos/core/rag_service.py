@@ -18,6 +18,8 @@ class RAGService:
         self.chunker = RecursiveChunker(
             chunk_size=self.settings.chunk_size,
             chunk_overlap=self.settings.chunk_overlap,
+            cross_page=self.settings.cross_page_chunking,
+            clean_headers_footers=self.settings.clean_headers_footers,
         )
         self.embedder = JinaEmbedder(self.settings)
         self.vector_store = ChromaVectorStore(self.settings)

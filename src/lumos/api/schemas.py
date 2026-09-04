@@ -15,6 +15,10 @@ class CitationItem(BaseModel):
     source_file: str
     score: float
     text: str
+    page_start: Optional[int] = None
+    page_end: Optional[int] = None
+    prev_chunk_id: Optional[str] = None
+    next_chunk_id: Optional[str] = None
 
 
 class ChatResponse(BaseModel):
