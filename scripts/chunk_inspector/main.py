@@ -155,6 +155,30 @@ def parse_args() -> argparse.Namespace:
         default=3,
         help="Number of chunk previews to display in terminal (default: 3; 0 to disable)",
     )
+    parser.add_argument(
+        "--cross-page",
+        action="store_true",
+        default=True,
+        help="Enable continuous chunking across page boundaries (default: True)",
+    )
+    parser.add_argument(
+        "--no-cross-page",
+        action="store_false",
+        dest="cross_page",
+        help="Disable continuous cross-page chunking",
+    )
+    parser.add_argument(
+        "--clean-headers",
+        action="store_true",
+        default=True,
+        help="Filter repeated PDF header/footer lines (default: True)",
+    )
+    parser.add_argument(
+        "--no-clean-headers",
+        action="store_false",
+        dest="clean_headers",
+        help="Disable header/footer line filtering",
+    )
     return parser.parse_args()
 
 
@@ -163,9 +187,11 @@ def build_markdown_report(
     source_file: str,
     chunk_size: int,
     chunk_overlap: int,
-    chunks: List[DocumentChunk],
+    chunks: List[Any],
     analyses: List[PageAnalysis],
     summary: Dict[str, Any],
+    cross_page: bool = True,
+    clean_headers: bool = True,
 ) -> str:
     """Generates a structured Markdown inspection document showing full chunk contents."""
     md_lines = [
@@ -178,6 +204,8 @@ def build_markdown_report(
         f"- **Source Document**: `{source_file}`",
         f"- **Book Title**: {book_title}",
         f"- **Chunk Configuration**: `chunk_size = {chunk_size}`, `chunk_overlap = {chunk_overlap}`",
+        f"- **Cross-Page Continuous Mode**: `{'Enabled' if cross_page else 'Disabled'}`",
+        f"- **Header/Footer Cleaning**: `{'Enabled' if clean_headers else 'Disabled'}`",
         f"- **Total Chunks Generated**: {summary['total_chunks']}",
         f"- **Average Chunk Length**: {summary['avg_chunk_chars']:.1f} characters ({summary['avg_chunk_words']:.1f} words)",
         f"- **Length Range (Min / Max)**: {summary['min_chunk_chars']} / {summary['max_chunk_chars']} characters",
@@ -201,8 +229,8 @@ def build_markdown_report(
     ]
 
     for idx, c in enumerate(chunks):
-        prev_overlap = ""
-        if idx > 0:
+        prev_overlap = getattr(c, "overlap_prev_text", "")
+        if not prev_overlap and idx > 0:
             prev_overlap = find_chunk_overlap(chunks[idx - 1].text, c.text)
 
         overlap_len = len(prev_overlap)
@@ -211,7 +239,16 @@ def build_markdown_report(
         md_lines.append(f"### Chunk #{c.chunk_index} (`{c.chunk_id}`)")
         md_lines.append("")
         md_lines.append(f"- **Section**: `{c.section}`")
+        if getattr(c, "page_start", None) is not None and getattr(c, "page_end", None) is not None:
+            if c.page_start == c.page_end:
+                md_lines.append(f"- **Pages**: `Page {c.page_start}`")
+            else:
+                md_lines.append(f"- **Pages**: `Page {c.page_start}` to `Page {c.page_end}`")
         md_lines.append(f"- **Length**: `{len(c.text)}` chars | `{word_count}` words")
+        if getattr(c, "prev_chunk_id", None):
+            md_lines.append(f"- **Prev Chunk ID**: `{c.prev_chunk_id}`")
+        if getattr(c, "next_chunk_id", None):
+            md_lines.append(f"- **Next Chunk ID**: `{c.next_chunk_id}`")
         if overlap_len > 0:
             preview_overlap = prev_overlap.replace("\n", " ").strip()
             if len(preview_overlap) > 100:
@@ -219,7 +256,7 @@ def build_markdown_report(
             md_lines.append(f"- **Overlap with Chunk #{idx - 1}**: `{overlap_len}` chars")
             md_lines.append(f"  > *\"{preview_overlap}\"*")
         else:
-            md_lines.append("- **Overlap**: None (New section boundary or start)")
+            md_lines.append("- **Overlap**: None (Start of document or isolated section)")
 
         md_lines.append("")
         md_lines.append("```text")
@@ -311,6 +348,8 @@ def main() -> None:
         show_labels=True,
         show_legend=True,
         show_overlap=True,
+        cross_page=args.cross_page,
+        clean_headers_footers=args.clean_headers,
     )
 
     analyses, chunks = annotator.process_file(
@@ -337,7 +376,9 @@ def main() -> None:
     overlap_count = 0
     overlap_chars_total = 0
     for idx in range(1, len(chunks)):
-        ov = find_chunk_overlap(chunks[idx - 1].text, chunks[idx].text)
+        ov = getattr(chunks[idx], "overlap_prev_text", "")
+        if not ov:
+            ov = find_chunk_overlap(chunks[idx - 1].text, chunks[idx].text)
         if ov:
             overlap_count += 1
             overlap_chars_total += len(ov)
@@ -355,6 +396,8 @@ def main() -> None:
         "avg_chunk_words": round(avg_words, 1),
         "overlapping_chunks_count": overlap_count,
         "avg_overlap_chars": round(avg_overlap, 1),
+        "cross_page": args.cross_page,
+        "clean_headers": args.clean_headers,
     }
 
     print(f"\n[Done] Successfully chunked document into {len(chunks)} chunks across {len(analyses)} pages!")
@@ -362,6 +405,8 @@ def main() -> None:
     print(f"  * Characters Range    : {min_chars} min / {avg_chars:.1f} avg / {max_chars} max")
     print(f"  * Word Count          : {total_words:,} total (avg {avg_words:.1f} words/chunk)")
     print(f"  * Overlapping Chunks  : {overlap_count} chunks with preceding overlap (avg {avg_overlap:.1f} chars)")
+    print(f"  * Cross-Page Mode     : {'Enabled' if args.cross_page else 'Disabled'}")
+    print(f"  * Header/Footer Clean : {'Enabled' if args.clean_headers else 'Disabled'}")
 
     if input_path.suffix.lower() == ".pdf" and output_pdf_path.exists():
         print(f"  * Annotated PDF       : {output_pdf_path.resolve()} ({output_pdf_path.stat().st_size / 1024:.1f} KB)")
@@ -387,6 +432,8 @@ def main() -> None:
             "chunk_settings": {
                 "chunk_size": args.chunk_size,
                 "chunk_overlap": args.chunk_overlap,
+                "cross_page": args.cross_page,
+                "clean_headers": args.clean_headers,
             },
             "summary": summary_stats,
             "chunks": [
@@ -394,15 +441,22 @@ def main() -> None:
                     "chunk_id": c.chunk_id,
                     "chunk_index": c.chunk_index,
                     "section": c.section,
+                    "page_start": getattr(c, "page_start", None),
+                    "page_end": getattr(c, "page_end", None),
+                    "pages": getattr(c, "pages", []),
                     "book_title": c.book_title,
                     "source_file": c.source_file,
+                    "prev_chunk_id": getattr(c, "prev_chunk_id", None),
+                    "next_chunk_id": getattr(c, "next_chunk_id", None),
                     "char_count": len(c.text),
                     "word_count": len(c.text.split()),
                     "overlap_prev_chars": (
-                        len(find_chunk_overlap(chunks[idx - 1].text, c.text)) if idx > 0 else 0
+                        getattr(c, "overlap_prev_chars", 0)
+                        or (len(find_chunk_overlap(chunks[idx - 1].text, c.text)) if idx > 0 else 0)
                     ),
                     "overlap_prev_text": (
-                        find_chunk_overlap(chunks[idx - 1].text, c.text) if idx > 0 else ""
+                        getattr(c, "overlap_prev_text", "")
+                        or (find_chunk_overlap(chunks[idx - 1].text, c.text) if idx > 0 else "")
                     ),
                     "text": c.text,  # Full content after chunking!
                 }
@@ -442,6 +496,8 @@ def main() -> None:
             chunks=chunks,
             analyses=analyses,
             summary=summary_stats,
+            cross_page=args.cross_page,
+            clean_headers=args.clean_headers,
         )
         with open(md_path, "w", encoding="utf-8") as f:
             f.write(md_content)

@@ -20,17 +20,25 @@ if project_root not in sys.path:
 from lumos.core.chunker import DocumentChunk, RecursiveChunker
 from lumos.core.parser import DocumentParser, DocumentSection
 
-
-def find_chunk_overlap(text1: str, text2: str, max_check: int = 500) -> str:
-    """Finds the longest suffix of text1 that is a prefix of text2."""
-    if not text1 or not text2:
-        return ""
-    check_len = min(len(text1), len(text2), max_check)
-    for length in range(check_len, 5, -1):
-        suffix = text1[-length:]
-        if text2.startswith(suffix):
-            return suffix
-    return ""
+try:
+    from scripts.chunk_inspector.cross_chunker import (
+        CrossPageChunker,
+        InspectorChunk,
+        find_chunk_overlap,
+    )
+except ModuleNotFoundError:
+    try:
+        from cross_chunker import (
+            CrossPageChunker,
+            InspectorChunk,
+            find_chunk_overlap,
+        )
+    except ModuleNotFoundError:
+        from .cross_chunker import (
+            CrossPageChunker,
+            InspectorChunk,
+            find_chunk_overlap,
+        )
 
 
 def group_lines_into_boxes(
@@ -195,6 +203,8 @@ class PDFChunkAnnotator:
         show_legend: bool = True,
         show_overlap: bool = True,
         fill_opacity: float = 0.08,
+        cross_page: bool = True,
+        clean_headers_footers: bool = True,
     ):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
@@ -204,15 +214,22 @@ class PDFChunkAnnotator:
         self.show_legend = show_legend
         self.show_overlap = show_overlap
         self.fill_opacity = fill_opacity
+        self.cross_page = cross_page
+        self.clean_headers_footers = clean_headers_footers
 
         self.parser = DocumentParser()
-        self.chunker = RecursiveChunker(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+        self.chunker = CrossPageChunker(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            cross_page=cross_page,
+            clean_headers_footers=clean_headers_footers,
+        )
 
     def analyze_document(
         self,
         file_path: str | Path,
-    ) -> Tuple[List[DocumentSection], List[DocumentChunk]]:
-        """Parses document sections and generates RecursiveChunker chunks."""
+    ) -> Tuple[List[DocumentSection], List[Any]]:
+        """Parses document sections and generates continuous overlapping chunks."""
         sections = self.parser.parse(file_path)
         chunks = self.chunker.chunk_sections(sections)
         return sections, chunks
@@ -221,7 +238,7 @@ class PDFChunkAnnotator:
         self,
         page: pymupdf.Page,
         page_num: int,
-        all_chunks: List[DocumentChunk],
+        all_chunks: List[Any],
     ) -> PageAnalysis:
         """Locates chunks on a PDF page and groups their visual bounding boxes."""
         analysis = PageAnalysis(
@@ -261,12 +278,17 @@ class PDFChunkAnnotator:
 
         # Chunks corresponding to this page
         page_section_name = f"Page {page_num}"
-        page_chunks = [c for c in all_chunks if c.section == page_section_name]
+        page_chunks = [
+            c for c in all_chunks
+            if (hasattr(c, "pages") and page_num in c.pages)
+            or (hasattr(c, "page_start") and c.page_start <= page_num <= c.page_end)
+            or c.section == page_section_name
+        ]
 
         for c in page_chunks:
-            overlap_text = ""
-            overlap_chars = 0
-            if c.chunk_index > 0:
+            overlap_text = getattr(c, "overlap_prev_text", "")
+            overlap_chars = getattr(c, "overlap_prev_chars", 0)
+            if not overlap_text and c.chunk_index > 0:
                 prev_c = all_chunks[c.chunk_index - 1]
                 overlap_text = find_chunk_overlap(prev_c.text, c.text)
                 overlap_chars = len(overlap_text)
@@ -280,6 +302,9 @@ class PDFChunkAnnotator:
                     matched_lines.append(item["bbox"])
                     if overlap_text and (lt in overlap_text or (len(lt) > 15 and lt[:20] in overlap_text)):
                         overlap_lines.append(item["bbox"])
+
+            if not matched_lines:
+                continue
 
             chunk_boxes = group_lines_into_boxes(matched_lines)
             overlap_boxes = group_lines_into_boxes(overlap_lines)
@@ -358,7 +383,10 @@ class PDFChunkAnnotator:
                 )
 
                 if self.show_labels and b_idx == 0:
-                    badge_parts = [f"Chunk #{chunk_info.chunk_index}", f"{chunk_info.char_count}c"]
+                    badge_parts = [f"Chunk #{chunk_info.chunk_index}"]
+                    if chunk_info.section and chunk_info.section.startswith("Pages"):
+                        badge_parts.append(chunk_info.section)
+                    badge_parts.append(f"{chunk_info.char_count}c")
                     if chunk_info.overlap_prev_chars > 0:
                         badge_parts.append(f"Overlap {chunk_info.overlap_prev_chars}c")
                     label = " | ".join(badge_parts)

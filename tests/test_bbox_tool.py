@@ -211,3 +211,113 @@ def test_outputs_in_named_subfolder(monkeypatch):
         # Check that no outputs were placed loose side-by-side with SpecialReport.pdf
         loose_files = [f.name for f in Path(tmpdir).iterdir() if f.is_file()]
         assert loose_files == ["SpecialReport.pdf"]
+
+
+def test_cross_page_chunker_unit():
+    """Verifies that CrossPageChunker seamlessly connects sections and preserves bidirectional links."""
+    from scripts.chunk_inspector.cross_chunker import CrossPageChunker, clean_section_text
+    from lumos.core.parser import DocumentSection
+
+    sec1 = DocumentSection(
+        text="Alpha section contains introductory remarks and concepts. " * 3,
+        book_title="AI Architecture",
+        section="Page 1",
+        source_file="ai_arch.pdf",
+    )
+    sec2 = DocumentSection(
+        text="Beta section discusses multi-agent coordination systems. " * 3,
+        book_title="AI Architecture",
+        section="Page 2",
+        source_file="ai_arch.pdf",
+    )
+
+    # Chunker with small size so it bridges across the boundary
+    chunker = CrossPageChunker(chunk_size=160, chunk_overlap=40, cross_page=True, clean_headers_footers=True)
+    chunks = chunker.chunk_sections([sec1, sec2])
+
+    assert len(chunks) >= 2
+    # Verify bidirectional linking
+    assert chunks[0].prev_chunk_id is None
+    assert chunks[0].next_chunk_id == chunks[1].chunk_id
+    assert chunks[1].prev_chunk_id == chunks[0].chunk_id
+
+    # Verify at least one chunk spans across pages or has cross-page overlap
+    has_cross_span = any(c.page_start != c.page_end for c in chunks)
+    has_overlap = any(c.overlap_prev_chars > 0 for c in chunks[1:])
+    assert has_cross_span or has_overlap
+    assert all(c.char_count > 0 for c in chunks)
+
+
+def test_header_footer_cleaning_unit():
+    """Verifies that clean_section_text strips timestamps, URLs, page counts, and edge title repetitions."""
+    from scripts.chunk_inspector.cross_chunker import clean_section_text
+
+    raw_text = (
+        "Building Effective AI Agents \\ Anthropic\n"
+        "Here is the core body of page 1 text.\n"
+        "It describes multi-agent workflows.\n"
+        "9/1/26, 12:59 AM\n"
+        "Building Effective AI Agents \\ Anthropic\n"
+        "https://www.anthropic.com/engineering/building-effective-agents\n"
+        "1/19"
+    )
+
+    cleaned = clean_section_text(raw_text, book_title="Building Effective AI Agents \\ Anthropic")
+    assert "Here is the core body" in cleaned
+    assert "multi-agent workflows" in cleaned
+    assert "9/1/26" not in cleaned
+    assert "https://" not in cleaned
+    assert "1/19" not in cleaned
+
+
+def test_annotator_cross_page_pdf():
+    """Verifies that PDFChunkAnnotator maps and visualizes chunks spanning multiple pages."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        pdf_path = Path(tmpdir) / "two_page_doc.pdf"
+        out_pdf = Path(tmpdir) / "annotated_cross.pdf"
+        img_dir = Path(tmpdir) / "previews"
+
+        doc = pymupdf.open()
+        p1 = doc.new_page(width=400, height=400)
+        p1.insert_text((40, 50), "First page sentence that leads to concepts.")
+        p1.insert_text((40, 70), "Continuity text that should bridge across the boundary.")
+        p1.insert_text((40, 380), "1/2")
+
+        p2 = doc.new_page(width=400, height=400)
+        p2.insert_text((40, 50), "Second page beginning with further agent details.")
+        p2.insert_text((40, 70), "Conclusion of the multi-agent topic.")
+        p2.insert_text((40, 380), "2/2")
+
+        doc.set_metadata({"title": "MultiPage Guide"})
+        doc.save(str(pdf_path))
+        doc.close()
+
+        annotator = PDFChunkAnnotator(
+            chunk_size=120,
+            chunk_overlap=30,
+            cross_page=True,
+            clean_headers_footers=True,
+        )
+        analyses, chunks = annotator.process_file(
+            input_path=pdf_path,
+            output_path=out_pdf,
+            export_images_dir=img_dir,
+            dpi=100,
+        )
+
+        assert len(analyses) == 2
+        assert len(chunks) >= 2
+        assert out_pdf.exists()
+
+        # Check that previews were exported for both pages
+        assert (img_dir / "page_01_chunk_bbox.png").exists()
+        assert (img_dir / "page_02_chunk_bbox.png").exists()
+
+        # Check that page 1 and page 2 have chunks analyzed
+        assert analyses[0].chunk_count >= 1
+        assert analyses[1].chunk_count >= 1
+
+        # Check linking
+        assert chunks[0].next_chunk_id == chunks[1].chunk_id
+        assert chunks[1].prev_chunk_id == chunks[0].chunk_id
+
