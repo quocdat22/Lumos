@@ -1,0 +1,137 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created_at": "2026-09-05",
+    "description": "Golden evaluation dataset for Lumos RAG pipeline",
+    "total_samples": 9,
+    "books": [
+      "Elon Musk (Walter Isaacson) [231-246]",
+      "Building Effective AI Agents \\ Anthropic",
+      "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330]"
+    ]
+  },
+  "test_cases": [
+    {
+      "id": "golden_001",
+      "book_title": "Elon Musk (Walter Isaacson) [231-246]",
+      "source_file": "Elon Musk (Walter Isaacson) [231-246].pdf",
+      "chunk_id": "50965771a132dece",
+      "section": "Pages 1 - 2",
+      "pages": [
+        1,
+        2
+      ],
+      "question": "What was the experimental Falcon 9 prototype dubbed 'Grasshopper', and where were its test hops conducted?",
+      "ground_truth_answer": "'Grasshopper' was an experimental Falcon 9 prototype developed as part of Musk's quest to build a reusable rocket. It featured landing legs and steerable grid fins, and could take slow hops up and down to about three thousand feet at the SpaceX test facility in McGregor, Texas.",
+      "context": "Musk’s quest to build a reusable rocket led to the development of an experimental Falcon 9 prototype dubbed “Grasshopper.” It had landing legs and steerable grid Йns and could take slow hops up and down to about three thousand feet at the SpaceX test facility in McGregor, Texas. Excited by the progress they were making, Musk invited the SpaceX board there in August 2014 to see the future in action."
+    },
+    {
+      "id": "golden_002",
+      "book_title": "Elon Musk (Walter Isaacson) [231-246]",
+      "source_file": "Elon Musk (Walter Isaacson) [231-246].pdf",
+      "chunk_id": "90bdc87539cfdff9",
+      "section": "Page 11",
+      "pages": [
+        11
+      ],
+      "question": "What was the theme of Elon Musk's forty-second birthday party in June 2013, and what risky demonstration took place?",
+      "ground_truth_answer": "The theme was Japanese steampunk, with Musk and other men dressed as samurai warriors. During the party, a blindfolded knife-thrower performed a demonstration targeting a pink balloon that Musk placed underneath his groin.",
+      "context": "For his forty-second birthday, in June 2013, Talulah rented an ersatz castle in Tarrytown, New York, just north of New York City, and invited forty friends. The theme this time was Japanese steampunk, and Musk and the other men were dressed as samurai warriors. There was a performance of Gilbert and Sullivan’s The Mikado, which had been rewritten slightly to feature Musk as the Japanese emperor, and a demonstration by a knife-thrower. Musk, never one to avoid risks, even needless ones, put a pink balloon just underneath his groin for the knife-thrower to target while blindfolded."
+    },
+    {
+      "id": "golden_003",
+      "book_title": "Elon Musk (Walter Isaacson) [231-246]",
+      "source_file": "Elon Musk (Walter Isaacson) [231-246].pdf",
+      "chunk_id": "8f72fbfcab7ed883",
+      "section": "Page 15",
+      "pages": [
+        15
+      ],
+      "question": "What two major real-world data sources did Elon Musk recognize as valuable troves for training artificial intelligence bots?",
+      "ground_truth_answer": "Musk recognized Tesla as a gold mine because it collected millions of frames of video daily from drivers handling different situations, and Twitter as another trove processing 500 million posts per day from humans.",
+      "context": "He also realized that success in the Йeld of artiЙcial intelligence would come from having access to huge amounts of real-world data that the bots could learn from. One such gold mine, he realized at the time, was Tesla, which collected millions of frames of video each day of drivers handling diАerent situations. “Probably Tesla will have more real-world data than any other company in the world,” he said. Another trove of data, he would later come to realize, was Twitter, which by 2023 was processing 500 million posts per day from humans."
+    },
+    {
+      "id": "golden_004",
+      "book_title": "Building Effective AI Agents \\ Anthropic",
+      "source_file": "BuildingEffectiveAIAgents_Anthropic.pdf",
+      "chunk_id": "9837ec4bc5200b38",
+      "section": "Pages 1 - 2",
+      "pages": [
+        1,
+        2
+      ],
+      "question": "According to Anthropic, what design approach do the most successful LLM agent implementations use rather than complex frameworks?",
+      "ground_truth_answer": "Anthropic observed that the most successful implementations did not rely on complex frameworks or specialized libraries; instead, they built with simple, composable patterns.",
+      "context": "weren't using complex frameworks or specialized libraries. Instead, they were building with simple, composable patterns. In this post, we share what we’ve learned from working with our customers and building agents ourselves, and give practical advice for developers on building effective agents. What are agents? 'Agent' can be defined in several ways. Some customers define agents as fully autonomous systems that operate independently over extended periods, using various tools to accomplish complex tasks. Others use the term to describe more prescriptive implementations that follow predefined workflows. At Anthropic, we categorize all these variations as agentic systems, but draw an important architectural distinction between workflows and agents:"
+    },
+    {
+      "id": "golden_005",
+      "book_title": "Building Effective AI Agents \\ Anthropic",
+      "source_file": "BuildingEffectiveAIAgents_Anthropic.pdf",
+      "chunk_id": "d6e0e29ea24b53ec",
+      "section": "Pages 7 - 8",
+      "pages": [
+        7,
+        8
+      ],
+      "question": "How does the orchestrator-workers workflow operate, and for what type of tasks is it well-suited?",
+      "ground_truth_answer": "In the orchestrator-workers workflow, a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results. It is well-suited for complex tasks where the required subtasks cannot be predicted in advance (such as coding tasks where the number of modified files and nature of changes depend on the specific task).",
+      "context": "Workflow: Orchestrator-workers\n\nIn the orchestrator-workers workflow, a central LLM dynamically breaks down tasks,\n\ndelegates them to worker LLMs, and synthesizes their results.\n\nThe orchestrator-workers workflow\n\nWhen to use this workflow: This workflow is well-suited for complex tasks where\n\nyou can’t predict the subtasks needed (in coding, for example, the number of files that\n\nneed to be changed and the nature of the change in each file likely depend on the\n\ntask). Whereas it’s topographically similar, the key difference from parallelization is\n\nits flexibility—subtasks aren't pre-defined, but determined by the orchestrator based\n\non the specific input."
+    },
+    {
+      "id": "golden_006",
+      "book_title": "Building Effective AI Agents \\ Anthropic",
+      "source_file": "BuildingEffectiveAIAgents_Anthropic.pdf",
+      "chunk_id": "23e2d08aeddbff51",
+      "section": "Page 14",
+      "pages": [
+        14
+      ],
+      "question": "What key recommendations does Anthropic provide for deciding on tool formats in Agent-Computer Interfaces (ACI)?",
+      "ground_truth_answer": "Anthropic recommends: (1) giving the model enough tokens to think before writing itself into a corner, (2) keeping the format close to naturally occurring text on the internet, and (3) eliminating formatting overhead, such as requiring line counts in diff headers or string-escaping code inside JSON.",
+      "context": "Our suggestions for deciding on tool formats are the following:\n\nGive the model enough tokens to \"think\" before it writes itself into a corner.\n\nKeep the format close to what the model has seen naturally occurring in text on the\n\ninternet.\n\nMake sure there's no formatting \"overhead\" such as having to keep an accurate\n\ncount of thousands of lines of code, or string-escaping any code it writes.\n\nOne rule of thumb is to think about how much effort goes into human-computer\n\ninterfaces (HCI), and plan to invest just as much effort in creating good agent-\ncomputer interfaces (ACI)."
+    },
+    {
+      "id": "golden_007",
+      "book_title": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330]",
+      "source_file": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330].pdf",
+      "chunk_id": "537ecaf8199e0cf8",
+      "section": "Page 1",
+      "pages": [
+        1
+      ],
+      "question": "What are the two dominating patterns for context construction, and what distinguishes the agentic pattern from RAG?",
+      "ground_truth_answer": "The two dominating patterns are RAG (retrieval-augmented generation) and agents. While RAG is chiefly used for retrieving relevant context from external data sources, the agentic pattern allows models to use external tools to directly interact with the world, overcome shortcomings, and automate tasks.",
+      "context": "Two dominating patterns for context construction are RAG, or retrieval-augmented\ngeneration, and agents. The RAG pattern allows the model to retrieve relevant infor‐\nmation from external data sources. The agentic pattern allows the model to use tools\nsuch as web search and news APIs to gather information.\n\nWhile the RAG pattern is chiefly used for constructing context, the agentic pattern\ncan do much more than that. External tools can help models address their shortcom‐\nings and expand their capabilities. Most importantly, they give models the ability to\ndirectly interact with the world, enabling them to automate many aspects of our lives."
+    },
+    {
+      "id": "golden_008",
+      "book_title": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330]",
+      "source_file": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330].pdf",
+      "chunk_id": "d93fa54f0a0c1127",
+      "section": "Pages 21 - 22",
+      "pages": [
+        21,
+        22
+      ],
+      "question": "In Multimodal RAG, how can images be retrieved based on their visual content when matching against text queries?",
+      "ground_truth_answer": "To retrieve images based on visual content rather than metadata, a multimodal embedding model (such as CLIP) is used to generate embeddings for both text and images into a shared vector space, which are stored in a vector database for similarity search.",
+      "context": "If you want to retrieve images based on their content, you’ll need to have a way to\ncompare images to queries. If queries are texts, you’ll need a multimodal embedding\nmodel that can generate embeddings for both images and texts. Let’s say you use\nCLIP (Radford et al., 2021) as the multimodal embedding model. The retriever works\nas follows:\n\n1. Generate CLIP embeddings for all your data, both texts and images, and store\nthem in a vector database."
+    },
+    {
+      "id": "golden_009",
+      "book_title": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330]",
+      "source_file": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330].pdf",
+      "chunk_id": "fe87ee11377e4e03",
+      "section": "Pages 33 - 34",
+      "pages": [
+        33,
+        34
+      ],
+      "question": "What is the key difference between Foundation Model (FM) planners and Reinforcement Learning (RL) planners in agent systems?",
+      "ground_truth_answer": "The main difference is how their planners work: an RL agent's planner is trained via an RL algorithm (which requires significant time and resources), whereas in an FM agent, the foundation model itself acts as the planner (which can be prompted or fine-tuned with generally fewer resources and time).",
+      "context": "RL agents and FM agents are similar in many ways. They are both characterized by\ntheir environments and possible actions. The main difference is in how their planners\nwork. In an RL agent, the planner is trained by an RL algorithm. Training this RL\nplanner can require a lot of time and resources. In an FM agent, the model is the\nplanner. This model can be prompted or finetuned to improve its planning capabili‐\nties, and generally requires less time and fewer resources."
+    }
+  ]
+}
