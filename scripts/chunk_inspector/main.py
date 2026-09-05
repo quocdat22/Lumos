@@ -68,14 +68,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--chunk-size",
         type=int,
-        default=800,
-        help="Target maximum character size for each chunk (default: 800)",
+        default=512,
+        help="Target maximum character size for each chunk (default: 512)",
     )
     parser.add_argument(
         "--chunk-overlap",
         type=int,
-        default=150,
-        help="Character overlap size between consecutive chunks (default: 150)",
+        default=100,
+        help="Character overlap size between consecutive chunks (default: 100)",
     )
     parser.add_argument(
         "--show-lines",

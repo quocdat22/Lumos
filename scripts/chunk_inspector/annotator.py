@@ -17,6 +17,7 @@ project_root = str(Path(__file__).resolve().parent.parent.parent)
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
+from lumos.config import Settings, get_settings
 from lumos.core.chunker import DocumentChunk, RecursiveChunker
 from lumos.core.parser import DocumentParser, DocumentSection
 
@@ -195,34 +196,39 @@ class PDFChunkAnnotator:
 
     def __init__(
         self,
-        chunk_size: int = 800,
-        chunk_overlap: int = 150,
+        chunk_size: Optional[int] = None,
+        chunk_overlap: Optional[int] = None,
         show_lines: bool = False,
         show_images: bool = True,
         show_labels: bool = True,
         show_legend: bool = True,
         show_overlap: bool = True,
         fill_opacity: float = 0.08,
-        cross_page: bool = True,
-        clean_headers_footers: bool = True,
+        cross_page: Optional[bool] = None,
+        clean_headers_footers: Optional[bool] = None,
+        settings: Optional[Settings] = None,
     ):
-        self.chunk_size = chunk_size
-        self.chunk_overlap = chunk_overlap
+        s = settings or get_settings()
+        self.chunk_size = chunk_size if chunk_size is not None else s.chunk_size
+        self.chunk_overlap = chunk_overlap if chunk_overlap is not None else s.chunk_overlap
         self.show_lines = show_lines
         self.show_images = show_images
         self.show_labels = show_labels
         self.show_legend = show_legend
         self.show_overlap = show_overlap
         self.fill_opacity = fill_opacity
-        self.cross_page = cross_page
-        self.clean_headers_footers = clean_headers_footers
+        self.cross_page = cross_page if cross_page is not None else s.cross_page_chunking
+        self.clean_headers_footers = (
+            clean_headers_footers if clean_headers_footers is not None else s.clean_headers_footers
+        )
 
         self.parser = DocumentParser()
         self.chunker = CrossPageChunker(
-            chunk_size=chunk_size,
-            chunk_overlap=chunk_overlap,
-            cross_page=cross_page,
-            clean_headers_footers=clean_headers_footers,
+            chunk_size=self.chunk_size,
+            chunk_overlap=self.chunk_overlap,
+            cross_page=self.cross_page,
+            clean_headers_footers=self.clean_headers_footers,
+            settings=s,
         )
 
     def analyze_document(

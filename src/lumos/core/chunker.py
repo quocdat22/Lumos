@@ -3,6 +3,7 @@ import hashlib
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
+from lumos.config import Settings, get_settings
 from lumos.core.parser import DocumentSection
 
 
@@ -143,17 +144,22 @@ class RecursiveChunker:
 
     def __init__(
         self,
-        chunk_size: int = 800,
-        chunk_overlap: int = 150,
-        cross_page: bool = True,
-        clean_headers_footers: bool = True,
+        chunk_size: Optional[int] = None,
+        chunk_overlap: Optional[int] = None,
+        cross_page: Optional[bool] = None,
+        clean_headers_footers: Optional[bool] = None,
+        settings: Optional[Settings] = None,
     ):
-        if chunk_overlap >= chunk_size:
-            raise ValueError(f"chunk_overlap ({chunk_overlap}) must be strictly less than chunk_size ({chunk_size})")
-        self.chunk_size = chunk_size
-        self.chunk_overlap = chunk_overlap
-        self.cross_page = cross_page
-        self.clean_headers_footers = clean_headers_footers
+        s = settings or get_settings()
+        self.chunk_size = chunk_size if chunk_size is not None else s.chunk_size
+        self.chunk_overlap = chunk_overlap if chunk_overlap is not None else s.chunk_overlap
+        self.cross_page = cross_page if cross_page is not None else s.cross_page_chunking
+        self.clean_headers_footers = (
+            clean_headers_footers if clean_headers_footers is not None else s.clean_headers_footers
+        )
+
+        if self.chunk_overlap >= self.chunk_size:
+            raise ValueError(f"chunk_overlap ({self.chunk_overlap}) must be strictly less than chunk_size ({self.chunk_size})")
 
     def _extract_page_number(self, section_name: str, fallback_index: int) -> int:
         """Parses integer page number from section string like 'Page 3' or returns fallback."""

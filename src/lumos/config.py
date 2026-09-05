@@ -23,8 +23,8 @@ class Settings(BaseSettings):
     # Storage & RAG Settings
     chroma_persist_dir: str = "./data/chroma_db"
     upload_dir: str = "./data/uploads"
-    chunk_size: int = 800
-    chunk_overlap: int = 150
+    chunk_size: int = 512
+    chunk_overlap: int = 100
     top_k: int = 5
     cross_page_chunking: bool = True
     clean_headers_footers: bool = True

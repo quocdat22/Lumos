@@ -19,3 +19,6 @@ data/chroma_db/
 # OS specific
 .DS_Store
 *.swp
+
+# Evaluation cache
+eval/cache/embeddings_cache.pkl

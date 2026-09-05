@@ -33,7 +33,7 @@ Script sử dụng trực tiếp logic chia nhỏ văn bản từ [`RecursiveChu
 ## 🚀 Hướng dẫn sử dụng
 
 ### 1. Chạy mặc định
-Lệnh sẽ phân tích file PDF mặc định, chunking với `chunk_size=800` & `chunk_overlap=150`, và tự động lưu toàn bộ các file kết quả (PDF trực quan, file JSON và Markdown) vào thư mục con cùng tên với file PDF (ví dụ: `data/uploads/BuildingEffectiveAIAgents_Anthropic/`):
+Lệnh sẽ phân tích file PDF mặc định, chunking với `chunk_size=512` & `chunk_overlap=100`, và tự động lưu toàn bộ các file kết quả (PDF trực quan, file JSON và Markdown) vào thư mục con cùng tên với file PDF (ví dụ: `data/uploads/BuildingEffectiveAIAgents_Anthropic/`):
 ```bash
 uv run python -m scripts.chunk_inspector.main
 # Hoặc chạy trực tiếp file main.py:
@@ -71,8 +71,8 @@ uv run python -m scripts.chunk_inspector.main \
 | :--- | :--- | :--- |
 | `-i, --input` | `data/uploads/BuildingEffectiveAIAgents_Anthropic.pdf` | Đường dẫn file PDF hoặc EPUB đầu vào |
 | `-o, --output` | `<input_dir>/<file_stem>/<file_stem>_chunk_bbox.pdf` | Đường dẫn lưu file PDF sau khi gắn nhãn bounding box |
-| `--chunk-size` | `800` | Số ký tự tối đa cho mỗi chunk (theo logic `RecursiveChunker`) |
-| `--chunk-overlap`| `150` | Số ký tự gối đầu (overlap) giữa các chunk liên tiếp |
+| `--chunk-size` | `512` | Số ký tự tối đa cho mỗi chunk (theo logic `RecursiveChunker`) |
+| `--chunk-overlap`| `100` | Số ký tự gối đầu (overlap) giữa các chunk liên tiếp |
 | `--print-chunks` | `False` | In toàn bộ nội dung text của tất cả các chunk ra terminal |
 | `--preview-chunks`| `3` | Số lượng chunk xem trước trên terminal (đặt `0` để tắt) |
 | `--save-json` | `True` | Xuất file JSON chứa toàn bộ nội dung và tọa độ bounding box |
