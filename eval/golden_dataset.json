@@ -1,137 +1,404 @@
 {
   "metadata": {
-    "version": "1.0",
-    "created_at": "2026-09-05",
-    "description": "Golden evaluation dataset for Lumos RAG pipeline",
-    "total_samples": 9,
+    "version": "2.0",
+    "created_at": "2026-09-06",
+    "description": "Hard golden evaluation dataset for Lumos RAG pipeline focused on Designing Machine Learning Systems (Chip Huyen)",
+    "total_samples": 30,
     "books": [
-      "Elon Musk (Walter Isaacson) [231-246]",
-      "Building Effective AI Agents \\ Anthropic",
-      "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330]"
+      "Designing Machine Learning Systems"
     ]
   },
   "test_cases": [
     {
       "id": "golden_001",
-      "book_title": "Elon Musk (Walter Isaacson) [231-246]",
-      "source_file": "Elon Musk (Walter Isaacson) [231-246].pdf",
-      "chunk_id": "50965771a132dece",
-      "section": "Pages 1 - 2",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "f644bae098c38f50",
+      "section": "Page 24",
       "pages": [
-        1,
-        2
+        24
       ],
-      "question": "What was the experimental Falcon 9 prototype dubbed 'Grasshopper', and where were its test hops conducted?",
-      "ground_truth_answer": "'Grasshopper' was an experimental Falcon 9 prototype developed as part of Musk's quest to build a reusable rocket. It featured landing legs and steerable grid fins, and could take slow hops up and down to about three thousand feet at the SpaceX test facility in McGregor, Texas.",
-      "context": "Musk’s quest to build a reusable rocket led to the development of an experimental Falcon 9 prototype dubbed “Grasshopper.” It had landing legs and steerable grid Йns and could take slow hops up and down to about three thousand feet at the SpaceX test facility in McGregor, Texas. Excited by the progress they were making, Musk invited the SpaceX board there in August 2014 to see the future in action."
+      "question": "Why does a machine learning model's failure to generate reasonable predictions on a target dataset not conclusively prove the nonexistence of an underlying pattern, according to Chip Huyen?",
+      "ground_truth_answer": "A model's failure to make reasonable predictions does not prove that no pattern exists because the collected dataset or the selected machine learning algorithms may be inadequate or insufficient to capture and learn that underlying pattern.",
+      "context": "Whether a pattern exists might not be obvious, or if patterns exist, your dataset\nor ML algorithms might not be sufficient to capture them. For example, there\nmight be a pattern in how Elon Musk’s tweets affect cryptocurrency prices. How‐\never, you wouldn’t know until you’ve rigorously trained and evaluated your ML\nmodels on his tweets. Even if all your models fail to make reasonable predictions\nof cryptocurrency prices, it doesn’t mean there’s no pattern."
     },
     {
       "id": "golden_002",
-      "book_title": "Elon Musk (Walter Isaacson) [231-246]",
-      "source_file": "Elon Musk (Walter Isaacson) [231-246].pdf",
-      "chunk_id": "90bdc87539cfdff9",
-      "section": "Page 11",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "41c93dc146bfb603",
+      "section": "Page 35",
       "pages": [
-        11
+        35
       ],
-      "question": "What was the theme of Elon Musk's forty-second birthday party in June 2013, and what risky demonstration took place?",
-      "ground_truth_answer": "The theme was Japanese steampunk, with Musk and other men dressed as samurai warriors. During the party, a blindfolded knife-thrower performed a demonstration targeting a pink balloon that Musk placed underneath his groin.",
-      "context": "For his forty-second birthday, in June 2013, Talulah rented an ersatz castle in Tarrytown, New York, just north of New York City, and invited forty friends. The theme this time was Japanese steampunk, and Musk and the other men were dressed as samurai warriors. There was a performance of Gilbert and Sullivan’s The Mikado, which had been rewritten slightly to feature Musk as the Japanese emperor, and a demonstration by a knife-thrower. Musk, never one to avoid risks, even needless ones, put a pink balloon just underneath his groin for the knife-thrower to target while blindfolded."
+      "question": "Under what operational conditions should an engineering team favor a simple baseline over a complex model when marginal performance gains are not discernible to end users?",
+      "ground_truth_answer": "When minor performance improvements cannot be perceived by users and a simple model already provides acceptable performance, complex models are not justified unless they deliver substantial performance gains. This contrasts with high-volume applications where even minor increments (such as a 0.2% CTR lift) yield massive financial returns.",
+      "context": "For many tasks, a small improvement in performance can result in a huge boost\nin revenue or cost savings. For example, a 0.2% improvement in the click-through\nrate for a product recommender system can result in millions of dollars increase\nin revenue for an ecommerce site. However, for many tasks, a small improvement\nmight not be noticeable for users. For the second type of task, if a simple model can\ndo a reasonable job, complex models must perform significantly better to justify the\ncomplexity."
     },
     {
       "id": "golden_003",
-      "book_title": "Elon Musk (Walter Isaacson) [231-246]",
-      "source_file": "Elon Musk (Walter Isaacson) [231-246].pdf",
-      "chunk_id": "8f72fbfcab7ed883",
-      "section": "Page 15",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "d60d8c9db8c58280",
+      "section": "Page 43",
       "pages": [
-        15
+        43
       ],
-      "question": "What two major real-world data sources did Elon Musk recognize as valuable troves for training artificial intelligence bots?",
-      "ground_truth_answer": "Musk recognized Tesla as a gold mine because it collected millions of frames of video daily from drivers handling different situations, and Twitter as another trove processing 500 million posts per day from humans.",
-      "context": "He also realized that success in the Йeld of artiЙcial intelligence would come from having access to huge amounts of real-world data that the bots could learn from. One such gold mine, he realized at the time, was Tesla, which collected millions of frames of video each day of drivers handling diАerent situations. “Probably Tesla will have more real-world data than any other company in the world,” he said. Another trove of data, he would later come to realize, was Twitter, which by 2023 was processing 500 million posts per day from humans."
+      "question": "What core dimensions distinguish machine learning systems operating in production from those in academic research, according to Chip Huyen?",
+      "ground_truth_answer": "The major dimensions distinguishing ML in research from production include stakeholder involvement, computational priority, the properties of the data being processed, the gravity and impact of fairness issues, and the stringent requirements for model interpretability.",
+      "context": "This chapter also highlighted the differences between ML in research and ML in pro‐\nduction. The differences include the stakeholder involvement, computational priority,\nthe properties of data used, the gravity of fairness issues, and the requirements for\ninterpretability. This section is the most helpful to those coming to ML production\nfrom academia. We also discussed how ML systems differ from traditional software\nsystems, which motivated the need for this book."
     },
     {
       "id": "golden_004",
-      "book_title": "Building Effective AI Agents \\ Anthropic",
-      "source_file": "BuildingEffectiveAIAgents_Anthropic.pdf",
-      "chunk_id": "9837ec4bc5200b38",
-      "section": "Pages 1 - 2",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "ba1c2fb85a37c2e3",
+      "section": "Page 52",
       "pages": [
-        1,
-        2
+        52
       ],
-      "question": "According to Anthropic, what design approach do the most successful LLM agent implementations use rather than complex frameworks?",
-      "ground_truth_answer": "Anthropic observed that the most successful implementations did not rely on complex frameworks or specialized libraries; instead, they built with simple, composable patterns.",
-      "context": "weren't using complex frameworks or specialized libraries. Instead, they were building with simple, composable patterns. In this post, we share what we’ve learned from working with our customers and building agents ourselves, and give practical advice for developers on building effective agents. What are agents? 'Agent' can be defined in several ways. Some customers define agents as fully autonomous systems that operate independently over extended periods, using various tools to accomplish complex tasks. Others use the term to describe more prescriptive implementations that follow predefined workflows. At Anthropic, we categorize all these variations as agentic systems, but draw an important architectural distinction between workflows and agents:"
+      "question": "What common misconception do practitioners often hold regarding the workflow of machine learning development before deploying their first system to production?",
+      "ground_truth_answer": "Practitioners commonly assume ML development follows a straightforward, linear sequence of collecting data, training a model, and finishing upon deployment. In practice, production ML is an ongoing, cyclical, and iterative process requiring constant monitoring, updates, and extensive back-and-forth iteration across stages.",
+      "context": "Iterative Process\n\nDeveloping an ML system is an iterative and, in most cases, never-ending process.10\n\nOnce a system is put into production, it’ll need to be continually monitored and\nupdated.\n\nBefore deploying my first ML system, I thought the process would be linear and\nstraightforward. I thought all I had to do was to collect data, train a model, deploy\nthat model, and be done. However, I soon realized that the process looks more like a\ncycle with a lot of back and forth between different steps."
     },
     {
       "id": "golden_005",
-      "book_title": "Building Effective AI Agents \\ Anthropic",
-      "source_file": "BuildingEffectiveAIAgents_Anthropic.pdf",
-      "chunk_id": "d6e0e29ea24b53ec",
-      "section": "Pages 7 - 8",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "82ac81b0365f9479",
+      "section": "Page 69",
       "pages": [
-        7,
-        8
+        69
       ],
-      "question": "How does the orchestrator-workers workflow operate, and for what type of tasks is it well-suited?",
-      "ground_truth_answer": "In the orchestrator-workers workflow, a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results. It is well-suited for complex tasks where the required subtasks cannot be predicted in advance (such as coding tasks where the number of modified files and nature of changes depend on the specific task).",
-      "context": "Workflow: Orchestrator-workers\n\nIn the orchestrator-workers workflow, a central LLM dynamically breaks down tasks,\n\ndelegates them to worker LLMs, and synthesizes their results.\n\nThe orchestrator-workers workflow\n\nWhen to use this workflow: This workflow is well-suited for complex tasks where\n\nyou can’t predict the subtasks needed (in coding, for example, the number of files that\n\nneed to be changed and the nature of the change in each file likely depend on the\n\ntask). Whereas it’s topographically similar, the key difference from parallelization is\n\nits flexibility—subtasks aren't pre-defined, but determined by the orchestrator based\n\non the specific input."
+      "question": "In a decoupled microservice architecture where feature computation and model inference operate independently, what systems requirement arises for managing dataflow?",
+      "ground_truth_answer": "Decoupling feature engineering and model prediction into independent services requires establishing robust data-passing mechanisms across distinct processes, enabling computed features derived from raw data to be reliably transferred to the prediction service.",
+      "context": "When working with data in production, you usually work with data across multiple\nprocesses and services. For example, you might have a feature engineering service\nthat computes features from raw data, and a prediction service to generate predic‐\ntions based on computed features. This means that you’ll have to pass computed fea‐\ntures from the feature engineering service to the prediction service. In the following\nsection of the chapter, we’ll discuss different modes of data passing across processes."
     },
     {
       "id": "golden_006",
-      "book_title": "Building Effective AI Agents \\ Anthropic",
-      "source_file": "BuildingEffectiveAIAgents_Anthropic.pdf",
-      "chunk_id": "23e2d08aeddbff51",
-      "section": "Page 14",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "4ad7f8783bc2fcc4",
+      "section": "Page 84",
       "pages": [
-        14
+        84
       ],
-      "question": "What key recommendations does Anthropic provide for deciding on tool formats in Agent-Computer Interfaces (ACI)?",
-      "ground_truth_answer": "Anthropic recommends: (1) giving the model enough tokens to think before writing itself into a corner, (2) keeping the format close to naturally occurring text on the internet, and (3) eliminating formatting overhead, such as requiring line counts in diff headers or string-escaping code inside JSON.",
-      "context": "Our suggestions for deciding on tool formats are the following:\n\nGive the model enough tokens to \"think\" before it writes itself into a corner.\n\nKeep the format close to what the model has seen naturally occurring in text on the\n\ninternet.\n\nMake sure there's no formatting \"overhead\" such as having to keep an accurate\n\ncount of thousands of lines of code, or string-escaping any code it writes.\n\nOne rule of thumb is to think about how much effort goes into human-computer\n\ninterfaces (HCI), and plan to invest just as much effort in creating good agent-\ncomputer interfaces (ACI)."
+      "question": "Why is referring to document databases as 'schemaless' misleading from an architectural standpoint?",
+      "ground_truth_answer": "Calling document databases schemaless is misleading because data must eventually be consumed, and reading applications inherently assume a specific schema or structure. Document models merely shift the structural responsibility from the writing application to the reading application (schema-on-read).",
+      "context": "Because the document model doesn’t enforce a schema, it’s often referred to as sche‐\nmaless. This is misleading because, as discussed previously, data stored in documents\nwill be read later. The application that reads the documents usually assumes some\nkind of structure of the documents. Document databases just shift the responsibility\nof assuming structures from the application that writes the data to the application\nthat reads the data."
     },
     {
       "id": "golden_007",
-      "book_title": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330]",
-      "source_file": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330].pdf",
-      "chunk_id": "537ecaf8199e0cf8",
-      "section": "Page 1",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "718b31e26c16ca35",
+      "section": "Page 96",
       "pages": [
-        1
+        96
       ],
-      "question": "What are the two dominating patterns for context construction, and what distinguishes the agentic pattern from RAG?",
-      "ground_truth_answer": "The two dominating patterns are RAG (retrieval-augmented generation) and agents. While RAG is chiefly used for retrieving relevant context from external data sources, the agentic pattern allows models to use external tools to directly interact with the world, overcome shortcomings, and automate tasks.",
-      "context": "Two dominating patterns for context construction are RAG, or retrieval-augmented\ngeneration, and agents. The RAG pattern allows the model to retrieve relevant infor‐\nmation from external data sources. The agentic pattern allows the model to use tools\nsuch as web search and news APIs to gather information.\n\nWhile the RAG pattern is chiefly used for constructing context, the agentic pattern\ncan do much more than that. External tools can help models address their shortcom‐\nings and expand their capabilities. Most importantly, they give models the ability to\ndirectly interact with the world, enabling them to automate many aspects of our lives."
+      "question": "What technical bottleneck prevents conventional databases from functioning as data brokers in low-latency distributed systems, and what architecture replaces them?",
+      "ground_truth_answer": "Reading and writing operations in conventional databases introduce too much latency for systems with strict latency requirements. Consequently, architectures replace database brokering with in-memory real-time transports, which serve as rapid in-memory storage layers for inter-service communication.",
+      "context": "Technically, a database can be a broker—each service can write data to a database\nand other services that need the data can read from that database. However, as\nmentioned in the section “Data Passing Through Databases” on page 72, reading and\nwriting from databases are too slow for applications with strict latency requirements.\nInstead of using databases to broker data, we use in-memory storage to broker data.\nReal-time transports can be thought of as in-memory storage for data passing among\nservices."
     },
     {
       "id": "golden_008",
-      "book_title": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330]",
-      "source_file": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330].pdf",
-      "chunk_id": "d93fa54f0a0c1127",
-      "section": "Pages 21 - 22",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "279e41116fde2fe4",
+      "section": "Page 104",
       "pages": [
-        21,
-        22
+        104
       ],
-      "question": "In Multimodal RAG, how can images be retrieved based on their visual content when matching against text queries?",
-      "ground_truth_answer": "To retrieve images based on visual content rather than metadata, a multimodal embedding model (such as CLIP) is used to generate embeddings for both text and images into a shared vector space, which are stored in a vector database for similarity search.",
-      "context": "If you want to retrieve images based on their content, you’ll need to have a way to\ncompare images to queries. If queries are texts, you’ll need a multimodal embedding\nmodel that can generate embeddings for both images and texts. Let’s say you use\nCLIP (Radford et al., 2021) as the multimodal embedding model. The retriever works\nas follows:\n\n1. Generate CLIP embeddings for all your data, both texts and images, and store\nthem in a vector database."
+      "question": "How does stratified sampling mitigate the fundamental risk of simple random sampling when dealing with severe class imbalance?",
+      "ground_truth_answer": "Simple random sampling risks completely failing to sample rare classes from the population. Stratified sampling avoids this by partitioning the dataset into distinct target groups (strata) and sampling separately from each stratum, guaranteeing that samples from rare classes are included.",
+      "context": "Stratified Sampling\n\nTo avoid the drawback of simple random sampling, you can first divide your popula‐\ntion into the groups that you care about and sample from each group separately. For\nexample, to sample 1% of data that has two classes, A and B, you can sample 1% of\nclass A and 1% of class B. This way, no matter how rare class A or B is, you’ll ensure\nthat samples from it will be included in the selection. Each group is called a stratum,\nand this method is called stratified sampling."
     },
     {
       "id": "golden_009",
-      "book_title": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330]",
-      "source_file": "AI Engineering Building Applications with Foundation Models (Chip Huyen) [277-330].pdf",
-      "chunk_id": "fe87ee11377e4e03",
-      "section": "Pages 33 - 34",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "cbbe5c889a3431cc",
+      "section": "Page 116",
       "pages": [
-        33,
-        34
+        116
       ],
-      "question": "What is the key difference between Foundation Model (FM) planners and Reinforcement Learning (RL) planners in agent systems?",
-      "ground_truth_answer": "The main difference is how their planners work: an RL agent's planner is trained via an RL algorithm (which requires significant time and resources), whereas in an FM agent, the foundation model itself acts as the planner (which can be prompted or fine-tuned with generally fewer resources and time).",
-      "context": "RL agents and FM agents are similar in many ways. They are both characterized by\ntheir environments and possible actions. The main difference is in how their planners\nwork. In an RL agent, the planner is trained by an RL algorithm. Training this RL\nplanner can require a lot of time and resources. In an FM agent, the model is the\nplanner. This model can be prompted or finetuned to improve its planning capabili‐\nties, and generally requires less time and fewer resources."
+      "question": "Why is a small sample of hand-labeled data beneficial in weak supervision workflows, and how does this paradigm accommodate strict data privacy constraints?",
+      "ground_truth_answer": "A small set of hand-labeled data allows engineers to evaluate the accuracy of labeling functions (LFs) and discover data patterns to craft better heuristics. Under strict privacy requirements, engineers only need access to a small, cleared subset to write LFs, which can then automatically label sensitive production data without human exposure.",
+      "context": "In theory, you don’t need any hand labels for weak supervision. However, to get a\nsense of how accurate your LFs are, a small number of hand labels is recommended.\nThese hand labels can help you discover patterns in your data to write better LFs.\n\nWeak supervision can be especially useful when your data has strict privacy require‐\nments. You only need to see a small, cleared subset of data to write LFs, which can be\napplied to the rest of your data without anyone looking at it."
+    },
+    {
+      "id": "golden_010",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "7f1beb907fdd37d4",
+      "section": "Page 123",
+      "pages": [
+        123
+      ],
+      "question": "How does extreme class imbalance alter the learning dynamics of a machine learning model trying to recognize minority classes?",
+      "ground_truth_answer": "Extreme class imbalance provides insufficient training signal. When minority instances are scarce, the task degrades into a few-shot learning problem where the model makes decisions after seeing only a few examples; if rare classes are entirely missing from training data, the model may conclude they do not exist.",
+      "context": "The first reason is that class imbalance often means there’s insufficient signal for\nyour model to learn to detect the minority classes. In the case where there is a small\nnumber of instances in the minority class, the problem becomes a few-shot learning\nproblem where your model only gets to see the minority class a few times before\nhaving to make a decision on it. In the case where there is no instance of the rare\nclasses in your training set, your model might assume these rare classes don’t exist."
+    },
+    {
+      "id": "golden_011",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "7759503840a20e5b",
+      "section": "Page 140",
+      "pages": [
+        140
+      ],
+      "question": "In textual feature extraction, how is an n-gram formally defined, and what types of sub-elements can constitute its sequences?",
+      "ground_truth_answer": "An n-gram is defined as a contiguous sequence of n items extracted from a given sample of text. The constituent items can be phonemes, syllables, letters, or individual words.",
+      "context": "For those unfamiliar, an n-gram is a contiguous sequence of n items from a given\nsample of text. The items can be phonemes, syllables, letters, or words. For example,\ngiven the post “I like food,” its word-level 1-grams are [“I”, “like”, “food”] and its\nword-level 2-grams are [“I like”, “like food”]. This sentence’s set of n-gram features, if\nwe want n to be 1 and 2, is: [“I”, “like”, “food”, “I like”, “like food”]."
+    },
+    {
+      "id": "golden_012",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "a18dd59e407ddd68",
+      "section": "Page 150",
+      "pages": [
+        150
+      ],
+      "question": "Why do dynamically generated entities like user accounts, web domains, and IP addresses pose persistent challenges when used directly as categorical features?",
+      "ground_truth_answer": "These entities continuously expand over time as new accounts, domains, and IP addresses are constantly created. A model trained on existing categories cannot readily handle these emerging, unseen values, creating continuous out-of-vocabulary and cold-start dilemmas in production.",
+      "context": "This isn’t an extreme example that only happens if you work at Amazon. This\nproblem happens quite a lot. For example, if you want to predict whether a comment\nis spam, you might want to use the account that posted this comment as a feature,\nand new accounts are being created all the time. The same goes for new product\ntypes, new website domains, new restaurants, new companies, new IP addresses, and\nso on. If you work with any of them, you’ll have to deal with this problem."
+    },
+    {
+      "id": "golden_013",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "465e851cc06d44ad",
+      "section": "Page 158",
+      "pages": [
+        158
+      ],
+      "question": "How can calculating summary statistics for missing value imputation lead to data leakage, and what is the proper way to prevent it?",
+      "ground_truth_answer": "Data leakage occurs when imputation statistics (such as mean or median) are computed across the entire dataset rather than exclusively on the training split, inadvertently leaking test distribution information into training. To prevent this, statistics must be calculated solely on the train split and then applied to fill missing values across all splits.",
+      "context": "Filling in missing data with statistics from the test split\n\nOne common way to handle the missing values of a feature is to fill (input) them with\nthe mean or median of all values present. Leakage might occur if the mean or median\nis calculated using entire data instead of just the train split. This type of leakage is\nsimilar to the type of leakage caused by scaling, and it can be prevented by using only\nstatistics from the train split to fill in missing values in all the splits."
+    },
+    {
+      "id": "golden_014",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "20a5dcf8474be761",
+      "section": "Page 162",
+      "pages": [
+        162
+      ],
+      "question": "What tooling and methodology does Chip Huyen highlight for model-agnostic feature importance analysis compared to algorithm-specific approaches like gradient boosted trees?",
+      "ground_truth_answer": "While tree-based models like XGBoost provide built-in feature importance functions, Chip Huyen recommends model-agnostic frameworks such as SHAP (SHapley Additive exPlanations) and open-source packages like InterpretML to evaluate feature importance and interpret how predictions are formed across model architectures.",
+      "context": "Feature Importance\n\nThere are many different methods for measuring a feature’s importance. If you use\na classical ML algorithm like boosted gradient trees, the easiest way to measure\nthe importance of your features is to use built-in feature importance functions imple‐\nmented by XGBoost.17 For more model-agnostic methods, you might want to look\ninto SHAP (SHapley Additive exPlanations).18 InterpretML is a great open source\npackage that leverages feature importance to help you understand how your model\nmakes predictions."
+    },
+    {
+      "id": "golden_015",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "2b07de25435edc98",
+      "section": "Page 184",
+      "pages": [
+        184
+      ],
+      "question": "What practical challenges arise when attempting to apply traditional software code versioning principles directly to datasets?",
+      "ground_truth_answer": "Unlike source code that easily fits on a developer's local machine, datasets are often too large to duplicate locally. Additionally, defining what constitutes a 'diff' in data is ambiguous—whether it refers to content changes within any file, file additions/deletions, or changes to the whole repository's checksum.",
+      "context": "Code versioning tools allow for multiple people to work on the same codebase at the\nsame time by duplicating the codebase on each person’s local machine. However, a\ndataset might not fit into a local machine.\n\nSecond, there’s still confusion in what exactly constitutes a diff when we version data.\nWould diffs mean changes in the content of any file in your data repository, only\nwhen a file is removed or added, or when the checksum of the whole repository has\nchanged?"
+    },
+    {
+      "id": "golden_016",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "822be61f7d54755a",
+      "section": "Page 195",
+      "pages": [
+        195
+      ],
+      "question": "How is the search space structured in Neural Architecture Search (NAS), and what types of building blocks typically populate it?",
+      "ground_truth_answer": "In NAS, the search space is discrete, meaning the final architecture selects exactly one candidate option for each layer or operation from a predefined set of building blocks. These building blocks include various convolutions of different kernel sizes, linear layers, activation functions, pooling operations, identity mappings, or zero operations, adapted to base architectures like CNNs or transformers.",
+      "context": "For NAS, the search space is discrete—the final architecture uses only one of the\navailable options for each layer/operation,29 and you have to provide the set of build‐\ning blocks. The common building blocks are various convolutions of different sizes,\nlinear, various activations, pooling, identity, zero, etc. The set of building blocks varies\nbased on the base architecture, e.g., convolutional neural networks or transformers."
+    },
+    {
+      "id": "golden_017",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "804f6b259a109087",
+      "section": "Page 201",
+      "pages": [
+        201
+      ],
+      "question": "Why does an ML system not necessarily need to outperform existing heuristic or rule-based solutions on pure predictive accuracy to be viable for production?",
+      "ground_truth_answer": "An ML system with slightly inferior performance compared to existing heuristics or rule-based systems can still be highly viable and valuable in production if it is significantly easier, cheaper, or more practical to operate and maintain.",
+      "context": "Existing solutions\n\nIn many cases, ML systems are designed to replace existing solutions, which\nmight be business logic with a lot of if/else statements or third-party solutions.\nIt’s crucial to compare your new model to these existing solutions. Your ML\nmodel doesn’t always have to be better than existing solutions to be useful. A\nmodel whose performance is a little bit inferior can still be useful if it’s much\neasier or cheaper to use."
+    },
+    {
+      "id": "golden_018",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "c3c4cfc73988ce24",
+      "section": "Page 209",
+      "pages": [
+        209
+      ],
+      "question": "What core parallelization strategies are necessary for training large-scale models with hundreds of millions or billions of parameters on distributed systems?",
+      "ground_truth_answer": "Distributed training for large-scale models relies on three primary parallelization paradigms: data parallelism, model parallelism, and pipeline parallelism, requiring specialized systems engineering expertise to execute across distributed clusters.",
+      "context": "As models today are getting bigger and consuming more data, distributed training is\nbecoming an essential skill for ML model developers, and we discussed techniques\nfor parallelism including data parallelism, model parallelism, and pipeline parallel‐\nism. Making your models work on a large distributed system, like the one that runs\nmodels with hundreds of millions, if not billions, of parameters, can be challenging\nand require specialized system engineering expertise."
+    },
+    {
+      "id": "golden_019",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "84b773866dd3dfa8",
+      "section": "Page 221",
+      "pages": [
+        221
+      ],
+      "question": "How does batch prediction overcome the inference latency constraints inherent in online prediction systems?",
+      "ground_truth_answer": "Batch prediction precomputes inference results in advance and stores them in a database to be immediately fetched upon request, bypassing slow real-time model inference and enabling distributed processing of high-volume samples simultaneously.",
+      "context": "A problem with online prediction is that your model might take too long to generate\npredictions. Instead of generating predictions as soon as they arrive, what if you\ncompute predictions in advance and store them in your database, and fetch them\nwhen requests arrive? This is exactly what batch prediction does. With this approach,\nyou can generate predictions for multiple inputs at once, leveraging distributed\ntechniques to process a high volume of samples efficiently."
+    },
+    {
+      "id": "golden_020",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "2c825386ddc95e67",
+      "section": "Page 233",
+      "pages": [
+        233
+      ],
+      "question": "What physical and hardware limitations must be addressed when migrating machine learning computation directly to edge devices?",
+      "ground_truth_answer": "Edge devices must possess sufficient computational capability to process inference, adequate memory capacity to store and load model weights, and sufficient battery life or persistent power access to run the workload without draining energy excessively (e.g., executing full-sized BERT rapidly drains a phone's battery).",
+      "context": "To move computation to the edge, the edge devices have to be powerful enough to\nhandle the computation, have enough memory to store ML models and load them\ninto memory, as well as have enough battery or be connected to an energy source to\npower the application for a reasonable amount of time. Running a full-sized BERT on\nyour phone, if your phone is capable of running BERT, is a very quick way to kill its\nbattery."
+    },
+    {
+      "id": "golden_021",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "a7e1d68ef262150a",
+      "section": "Page 246",
+      "pages": [
+        246
+      ],
+      "question": "Using a machine translation system as an example, how do operational metrics differ from ML performance metrics in production evaluation?",
+      "ground_truth_answer": "Operational metrics measure system execution constraints (such as returning a translation within a strict one-second latency threshold), whereas ML performance metrics evaluate predictive quality (such as ensuring the output is an accurate translation of the input text 99% of the time).",
+      "context": "For an ML system, we care about both its operational metrics and its ML perfor‐\nmance metrics. For example, consider an English-French machine translation system.\nIts operational expectation might be that, given an English sentence, the system\nreturns a French translation within a one-second latency. Its ML performance expect‐\nation is that the returned translation is an accurate translation of the original English\nsentence 99% of the time."
+    },
+    {
+      "id": "golden_022",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "0a286865412a9ae7",
+      "section": "Pages 269 - 270",
+      "pages": [
+        269,
+        270
+      ],
+      "question": "Why does deploying a single monolithic model across heterogeneous geographical regions force higher retraining overhead compared to decoupled regional models?",
+      "ground_truth_answer": "Different regions experience data distribution shifts at different velocities (e.g., housing prices change faster in San Francisco than in rural Arizona). Serving both markets with a single combined model forces the system to retrain on data from both regions at the fastest required rate (demanded by San Francisco), incurring unnecessary updates for the slower-changing region.",
+      "context": "Data Distribution Shifts \n|\n\nYou might also want to design your system to make it easier for it to adapt to\nshifts. For example, housing prices might change a lot faster in major cities like\nSan Francisco than in rural Arizona, so a housing price prediction model serving\nrural Arizona might need to be updated less frequently than a model serving San\nFrancisco. If you use the same model to serve both markets, you’ll have to use data\nfrom both markets to update your model at the rate demanded by San Francisco."
+    },
+    {
+      "id": "golden_023",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "c791e9c0267414ea",
+      "section": "Page 279",
+      "pages": [
+        279
+      ],
+      "question": "What essential elements must be included in an automated alert description to ensure it is actionable for engineers on call?",
+      "ground_truth_answer": "An alert description should provide detailed diagnostics (such as timestamp, originating service, and specific metric breaches) along with concrete mitigation instructions or links to a runbook outlining standard operating procedures to resolve the incident.",
+      "context": "A description of the alert\n\nThis helps the alerted person understand what’s going on. The description should\nbe as detailed as possible, such as:\n\n## Recommender model accuracy below 90%\n\n${timestamp}: This alert originated from the service ${service-name}\n\nDepending on the audience of the alert, it’s often necessary to make the alert\nactionable by providing mitigation instructions or a runbook, a compilation of\nroutine procedures and operations that might help with handling the alert."
+    },
+    {
+      "id": "golden_024",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "29c83f1536f287a5",
+      "section": "Page 284",
+      "pages": [
+        284
+      ],
+      "question": "Why is continuous model updating on every single individual incoming sample rarely adopted for neural networks in production?",
+      "ground_truth_answer": "Updating neural networks on every single incoming sample makes them highly vulnerable to catastrophic forgetting, where the network abruptly and completely forgets previously learned knowledge upon assimilating new information.",
+      "context": "Continual Learning\n\nWhen hearing “continual learning,” many people think of the training paradigm\nwhere a model updates itself with every incoming sample in production. Very few\ncompanies actually do that. First, if your model is a neural network, learning with\nevery incoming sample makes it susceptible to catastrophic forgetting. Catastrophic\nforgetting refers to the tendency of a neural network to completely and abruptly\nforget previously learned information upon learning new information.1"
+    },
+    {
+      "id": "golden_025",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "4e71104ec1da97f3",
+      "section": "Page 301",
+      "pages": [
+        301
+      ],
+      "question": "How should teams evaluate the trade-off between architectural exploration and data iteration when seeking marginal performance gains?",
+      "ground_truth_answer": "Teams should evaluate resource efficiency: if discovering a new architecture requires 100X compute for a 1% performance gain, whereas updating the existing model on recent data requires only 1X compute for the same 1% gain, iterating on data is substantially more cost-effective. Only if data iteration yields negligible gains should compute be redirected toward architectural changes.",
+      "context": "On the one hand, if you find that iterating on your data doesn’t give you much\nperformance gain, then you should spend your resources on finding a better model.\nOn the other hand, if finding a better model architecture requires 100X compute for\ntraining and gives you 1% performance whereas updating the same model on data\nfrom the last three hours requires only 1X compute and also gives 1% performance\ngain, you’ll be better off iterating on data."
+    },
+    {
+      "id": "golden_026",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "2d3b1310c96e27a3",
+      "section": "Page 310",
+      "pages": [
+        310
+      ],
+      "question": "How does purely greedy exploitation of user clicks create an algorithmic popularity bias and starvation in recommendation systems?",
+      "ground_truth_answer": "If an item only earns value points when clicked, never-shown items remain at 0 points. Continuously exploiting items with the highest value scores perpetually reinforces existing popular items while starving unshown items of exposure, preventing the system from ever learning whether new items might have high value.",
+      "context": "Let’s say that each time a user clicks on an item, this item gets 1 value point. When an\nitem has 0 value points, it could either be because the item has never been shown to a\nuser, or because it’s been shown but not clicked on. You want to show users the items\nwith the highest value to them, but if you keep showing users only the items with\nthe most value points, you’ll keep on recommending the same popular items, and the\nnever-before-shown items will keep having 0 value points."
+    },
+    {
+      "id": "golden_027",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "9b5fec8f9c02725f",
+      "section": "Page 327",
+      "pages": [
+        327
+      ],
+      "question": "What economic and operational factors make cloud development environments cost-effective for engineering organizations despite recurring infrastructure costs?",
+      "ground_truth_answer": "Cloud environments feature automated shutdown mechanisms (e.g., after 30 minutes of inactivity) and cheap instance pricing (e.g., ~bash.1/hour for 4 vCPUs / 8GB RAM). Since engineering salary is far more expensive than cloud compute, saving just a few engineering hours per month easily justifies the operational expense.",
+      "context": "First, tools like GitHub Codespaces automatically shut down your instance after 30\nminutes of inactivity. Second, some instances are pretty cheap. For example, an AWS\ninstance with 4 vCPUs and 8 GB of memory costs around $0.1/hour, which comes\nto approximately $73/month if you never shut it down. Because engineering time is\nexpensive, if a cloud dev environment can help you save a few hours of engineering\ntime a month, it’s worth it for many companies."
+    },
+    {
+      "id": "golden_028",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "917736b97661b464",
+      "section": "Page 330",
+      "pages": [
+        330
+      ],
+      "question": "What operational challenge emerges when managing dozens of containerized microservices manually, and what role does a lightweight orchestrator like Docker Compose play?",
+      "ground_truth_answer": "Manually building, launching, resource-allocating, and stopping dozens or hundreds of containerized microservices is error-prone and labor-intensive. Container orchestration automates this lifecycle, with lightweight tools like Docker Compose managing multi-container coordination on a single host.",
+      "context": "If you have 100 microservices and each microservice requires its own container, you\nmight have 100 containers running at the same time. Manually building, running,\nallocating resources for, and stopping 100 containers might be a painful chore. A\ntool to help you manage multiple containers is called container orchestration. Docker\nCompose is a lightweight container orchestrator that can manage containers on a\nsingle host."
+    },
+    {
+      "id": "golden_029",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "b171d80117ed5b74",
+      "section": "Page 338",
+      "pages": [
+        338
+      ],
+      "question": "How do orchestration abstraction tools like Kubeflow and Metaflow bridge the development-to-production gap for data scientists?",
+      "ground_truth_answer": "They abstract away infrastructure boilerplate code (like low-level Airflow or Argo configs), allowing data scientists to execute workloads with the full compute power of the production cluster directly from local notebooks and write portable code that runs unchanged across dev and prod environments.",
+      "context": "Enter Kubeflow and Metaflow, the two tools that aim to help you run the workflow\nin both dev and prod environments by abstracting away infrastructure boilerplate\ncode usually needed to run Airflow or Argo. They promise to give data scientists\naccess to the full compute power of the prod environment from local notebooks,\nwhich effectively allows data scientists to use the same code in both dev and prod\nenvironments."
+    },
+    {
+      "id": "golden_030",
+      "book_title": "Designing Machine Learning Systems",
+      "source_file": "Designing Machine Learning Systems An Iterative Process for Production-Ready (Chip Huyen) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+      "chunk_id": "ec261806a98aec23",
+      "section": "Page 360",
+      "pages": [
+        360
+      ],
+      "question": "Why have fairness, ethics, and responsible AI evolved from abstract philosophical discussions into critical production requirements for machine learning practitioners?",
+      "ground_truth_answer": "Because ML systems are now embedded into nearly every aspect of human life, neglecting fairness and ethical safeguards can trigger catastrophic societal harms and systemic discrimination (as documented in works like 'Weapons of Math Destruction'), making responsible AI a legal, practical, and imperative engineering requirement.",
+      "context": "These terms are no longer just philosophical musings, but serious considerations for\nboth policy makers and everyday practitioners. Given ML is being deployed into\nalmost every aspect of our lives, failing to make our ML systems fair and ethical\ncan lead to catastrophic consequences, as outlined in the book Weapons of Math\nDestruction (Cathy O’Neil, Crown Books, 2016), and through other case studies\nmentioned throughout this book."
     }
   ]
 }

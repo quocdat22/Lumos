@@ -1,0 +1,482 @@
+{
+  "golden_001": {
+    "id": "golden_001",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "f644bae098c38f50",
+      "006975a14992b78e",
+      "356ca883e85ed90a",
+      "c94d263a02748493",
+      "9532ec09073bfad1"
+    ]
+  },
+  "golden_002": {
+    "id": "golden_002",
+    "hit@1": 0,
+    "hit@3": 0,
+    "hit@5": 1,
+    "mrr": 0.2,
+    "coverage@3": 0.3455,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "f7483e5898ed29b4",
+      "0e6973b81db77d8c",
+      "1278b0c03efe4ffe",
+      "32c81c5882e4b589",
+      "41c93dc146bfb603"
+    ]
+  },
+  "golden_003": {
+    "id": "golden_003",
+    "hit@1": 0,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 0.5,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "28228562477ce084",
+      "d60d8c9db8c58280",
+      "1ce875b86c71bb1b",
+      "caade413d4cb03f8",
+      "8cd60849d4fb7ab8"
+    ]
+  },
+  "golden_004": {
+    "id": "golden_004",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "ba1c2fb85a37c2e3",
+      "3db71dc499140cf0",
+      "bf1f1c301b428ee7",
+      "c4604c831d9fb50e",
+      "78fd570f7ffccae7"
+    ]
+  },
+  "golden_005": {
+    "id": "golden_005",
+    "hit@1": 0,
+    "hit@3": 0,
+    "hit@5": 0,
+    "mrr": 0.0,
+    "coverage@3": 0.3636,
+    "coverage@5": 0.3818,
+    "retrieved_chunk_ids": [
+      "d776f714ff6769d7",
+      "ed23497b8cecd222",
+      "6059ad7d1155eaad",
+      "759695b663b265e0",
+      "e71e92a86e0aa8c5"
+    ]
+  },
+  "golden_006": {
+    "id": "golden_006",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "4ad7f8783bc2fcc4",
+      "c9ad0ee8f333f9c4",
+      "27b901ba220f92af",
+      "87a4468838a89012",
+      "3924828bb53cd7ae"
+    ]
+  },
+  "golden_007": {
+    "id": "golden_007",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "718b31e26c16ca35",
+      "a160cb00e3c32ec6",
+      "0712cdd4aa6d2260",
+      "27b901ba220f92af",
+      "3a0d88ffe6b9248c"
+    ]
+  },
+  "golden_008": {
+    "id": "golden_008",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "6acfc0c6dbb4bee4",
+      "279e41116fde2fe4",
+      "1b8fa0d0f7959d11",
+      "1a227c5a51bc4441",
+      "feb7feac81f6b8cc"
+    ]
+  },
+  "golden_009": {
+    "id": "golden_009",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "cbbe5c889a3431cc",
+      "1f24e6d5e32afeac",
+      "22e5623cd5dfc2ba",
+      "e4811e18c359a0cc",
+      "6b0b80dd9b3a435f"
+    ]
+  },
+  "golden_010": {
+    "id": "golden_010",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "7f1beb907fdd37d4",
+      "2e1d27fc78cd64ce",
+      "d9f902ed7ed4d78e",
+      "b50f9cc57d0725af",
+      "6c9823897eec3145"
+    ]
+  },
+  "golden_011": {
+    "id": "golden_011",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "7759503840a20e5b",
+      "ca4a5707bf73aa00",
+      "d94a7c4790d54d52",
+      "b686f07a36d37968",
+      "1d6ad0a543900fe7"
+    ]
+  },
+  "golden_012": {
+    "id": "golden_012",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "a18dd59e407ddd68",
+      "4b8b532d28479c24",
+      "401dd2976148c0eb",
+      "4f2ddebfdc8ee85f",
+      "8110325893fc631d"
+    ]
+  },
+  "golden_013": {
+    "id": "golden_013",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "465e851cc06d44ad",
+      "38f84e7d74b82c86",
+      "4f05fba6544ead82",
+      "cb2438898af3d844",
+      "52e5ecd48303c67a"
+    ]
+  },
+  "golden_014": {
+    "id": "golden_014",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "20a5dcf8474be761",
+      "9fe93c1bd43e32d2",
+      "ff61ea3cbaa83f0b",
+      "f05ef636e3b624b3",
+      "133d9769b68f22fa"
+    ]
+  },
+  "golden_015": {
+    "id": "golden_015",
+    "hit@1": 0,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 0.5,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "b3c89555246c65d8",
+      "2b07de25435edc98",
+      "89cdf127c506d4b3",
+      "3283c3e546573bb2",
+      "f3413077f5779c1d"
+    ]
+  },
+  "golden_016": {
+    "id": "golden_016",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "822be61f7d54755a",
+      "d9a0c68a8bf55edf",
+      "87ab00df458f79bf",
+      "8215d75cbcb62cc2",
+      "501890870998935f"
+    ]
+  },
+  "golden_017": {
+    "id": "golden_017",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "804f6b259a109087",
+      "468aec838c178e20",
+      "bcd512b74713e803",
+      "006975a14992b78e",
+      "bcd7c0da8fbfbcea"
+    ]
+  },
+  "golden_018": {
+    "id": "golden_018",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "c3c4cfc73988ce24",
+      "7d9aed88c0b29805",
+      "d3e2b8762ad95dfb",
+      "817acfe75e776598",
+      "3fbf8054466cb66e"
+    ]
+  },
+  "golden_019": {
+    "id": "golden_019",
+    "hit@1": 0,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 0.3333333333333333,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "1ee5e01dda91e1a9",
+      "dbde99e78b872a25",
+      "84b773866dd3dfa8",
+      "70003fe1a4dd0ef8",
+      "1f9243da1d5ee356"
+    ]
+  },
+  "golden_020": {
+    "id": "golden_020",
+    "hit@1": 0,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 0.5,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "6a739c003ba095b2",
+      "2c825386ddc95e67",
+      "cf0e3182c7b63755",
+      "0d3d3323bc77d53a",
+      "7c278621d7360880"
+    ]
+  },
+  "golden_021": {
+    "id": "golden_021",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "a7e1d68ef262150a",
+      "d57f959e943ae70b",
+      "24d49623231d13c2",
+      "643db4dbc7a06751",
+      "21dfdb7294de949a"
+    ]
+  },
+  "golden_022": {
+    "id": "golden_022",
+    "hit@1": 0,
+    "hit@3": 0,
+    "hit@5": 0,
+    "mrr": 0.0,
+    "coverage@3": 0.371,
+    "coverage@5": 0.371,
+    "retrieved_chunk_ids": [
+      "0763a27afb429703",
+      "ad2ddb3f0e1d69e4",
+      "c35e4984e40291b9",
+      "4c3d64c5c9d1d92f",
+      "5f86cc8edae22a7e"
+    ]
+  },
+  "golden_023": {
+    "id": "golden_023",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "c791e9c0267414ea",
+      "759d80a3f814135b",
+      "bdce595a818ea801",
+      "de0e6e7474ddff30",
+      "fa0ed41a9874859d"
+    ]
+  },
+  "golden_024": {
+    "id": "golden_024",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "29c83f1536f287a5",
+      "373630aa01f85da1",
+      "53c6ade579f393d1",
+      "33b39a7263542119",
+      "51e08e02f229060c"
+    ]
+  },
+  "golden_025": {
+    "id": "golden_025",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "4e71104ec1da97f3",
+      "501890870998935f",
+      "30fc00e05176119e",
+      "689483a84be72dc7",
+      "c59c63462cf51508"
+    ]
+  },
+  "golden_026": {
+    "id": "golden_026",
+    "hit@1": 0,
+    "hit@3": 0,
+    "hit@5": 0,
+    "mrr": 0.0,
+    "coverage@3": 0.3279,
+    "coverage@5": 0.4262,
+    "retrieved_chunk_ids": [
+      "99e5938db9727fba",
+      "d9c6f93f567fad4f",
+      "6541ee9de169bc49",
+      "c50befa6851fd202",
+      "2aa10afd876e1963"
+    ]
+  },
+  "golden_027": {
+    "id": "golden_027",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "9b5fec8f9c02725f",
+      "1337285b7c8e42a3",
+      "edc1b1c179a53a8b",
+      "68655fe53e707f37",
+      "cb960cc2f265e8db"
+    ]
+  },
+  "golden_028": {
+    "id": "golden_028",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "917736b97661b464",
+      "52927df690a151b8",
+      "a3a313787e466758",
+      "d3674051c368d4ab",
+      "7e08d168007dfb94"
+    ]
+  },
+  "golden_029": {
+    "id": "golden_029",
+    "hit@1": 1,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 1.0,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "b171d80117ed5b74",
+      "0a0f98848361140a",
+      "7490d6f23d91de1a",
+      "28620193a832144c",
+      "f27ca74c7661dcb6"
+    ]
+  },
+  "golden_030": {
+    "id": "golden_030",
+    "hit@1": 0,
+    "hit@3": 1,
+    "hit@5": 1,
+    "mrr": 0.3333333333333333,
+    "coverage@3": 1.0,
+    "coverage@5": 1.0,
+    "retrieved_chunk_ids": [
+      "b1b713f20d1412d0",
+      "0a7580abd1aca32b",
+      "ec261806a98aec23",
+      "7ae635cd952874aa",
+      "7f6ef09c3104ccae"
+    ]
+  }
+}
