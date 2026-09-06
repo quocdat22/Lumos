@@ -52,7 +52,7 @@ def delete_document(source_file: str):
 def upload_document(uploaded_file):
     try:
         files = {"file": (uploaded_file.name, uploaded_file.getvalue(), uploaded_file.type)}
-        res = httpx.post(f"{BACKEND_URL}/api/ingest", files=files, timeout=300.0)
+        res = httpx.post(f"{BACKEND_URL}/api/ingest", files=files, timeout=900.0)
         if res.status_code == 200:
             return res.json()
         else:
@@ -90,7 +90,7 @@ with st.sidebar:
 
     if uploaded_file is not None:
         if st.button("📥 Parse & Index E-Book", use_container_width=True):
-            with st.spinner(f"Parsing, chunking, and embedding '{uploaded_file.name}'..."):
+            with st.spinner(f"Parsing, chunking, and embedding '{uploaded_file.name}' (full-length books may take 2-4 minutes to pace API requests)..."):
                 result = upload_document(uploaded_file)
                 if result:
                     st.success(

@@ -48,12 +48,19 @@ class RAGService:
         if not chunks:
             raise ValueError(f"Failed to generate text chunks from {path.name}")
 
-        # 3. Generate embeddings via Jina Embeddings API
-        texts = [c.text for c in chunks]
-        embeddings = self.embedder.embed_documents(texts)
+        # 3. Pipeline Ingestion: Embed & Upsert in batches to prevent memory bloat and save progress incrementally
+        pipeline_batch_size = 64
+        total_chunks = len(chunks)
+        indexed_count = 0
 
-        # 4. Upsert into ChromaDB
-        indexed_count = self.vector_store.add_chunks(chunks, embeddings)
+        for i in range(0, total_chunks, pipeline_batch_size):
+            batch_chunks = chunks[i : i + pipeline_batch_size]
+            batch_texts = [c.text for c in batch_chunks]
+            batch_embeddings = self.embedder.embed_documents(batch_texts)
+            self.vector_store.add_chunks(batch_chunks, batch_embeddings)
+            indexed_count += len(batch_chunks)
+            pct = (indexed_count / total_chunks) * 100
+            print(f"[{path.name}] Ingestion progress: {indexed_count}/{total_chunks} chunks indexed ({pct:.1f}%)")
 
         return {
             "source_file": original_filename or path.name,

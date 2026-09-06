@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     jina_api_key: str = ""
     jina_embedding_model: str = "jina-embeddings-v5-omni-small"
     jina_api_url: str = "https://api.jina.ai/v1/embeddings"
+    jina_batch_size: int = 16
+    jina_rate_limit_pause: float = 1.2
+    jina_max_retries: int = 5
 
     # Storage & RAG Settings
     chroma_persist_dir: str = "./data/chroma_db"
